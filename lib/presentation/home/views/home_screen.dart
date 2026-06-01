@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
+import 'package:of_28_movie_review_app/app/routes/app_routes.dart';
 import 'package:of_28_movie_review_app/presentation/home/controllers/home_controller.dart';
 
 import '../../../core/app_colors.dart';
@@ -44,6 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
               //   context,
               //   MaterialPageRoute(builder: (context) => SearchScreen()),
               // );
+              Get.toNamed(
+                AppRoutes.searchMovie
+              );
             },
             icon: Icon(Icons.search, color: Colors.white),
           ),
@@ -51,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       body: Column(
-        mainAxisAlignment: .start,
+        mainAxisAlignment: .center,
         children: [
           Obx(
             () {
@@ -73,6 +75,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         //     ),
                         //   ),
                         //);
+                        Get.toNamed(
+                          AppRoutes.movieDetails,
+                           arguments: controller.trendingMovies[index]
+                        );
                       },
                     );
                   },
