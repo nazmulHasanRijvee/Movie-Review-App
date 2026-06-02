@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:of_28_movie_review_app/app/routes/app_routes.dart';
 import 'package:of_28_movie_review_app/presentation/search_movie/controllers/search_movie_controller.dart';
+import 'package:of_28_movie_review_app/presentation/search_movie/widgets/movie_searched_card.dart';
 
 import '../../../core/app_colors.dart';
-import '../../home/widgets/movie_card.dart';
-
 
 
 class SearchScreen extends StatefulWidget {
@@ -80,7 +79,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   return ListView.builder(
                     itemCount: controller.searchResults.length,
                     itemBuilder: (context, index) {
-                      return MovieCard(
+                      return MovieSearchedCard(
                         movie: controller.searchResults[index],
                         onTap: () {
                           Get.toNamed(

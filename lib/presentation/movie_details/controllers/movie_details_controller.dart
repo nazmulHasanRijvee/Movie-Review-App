@@ -1,39 +1,60 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:of_28_movie_review_app/data/services/api_service.dart';
-import 'package:of_28_movie_review_app/data/utils/urls.dart';
+import 'package:of_28_movie_review_app/data/models/movie_details_model.dart';
+import 'package:of_28_movie_review_app/data/repositories/movie_repository.dart';
+
+import '../../../data/models/movie_result.dart';
 
 class MovieDetailsController extends GetxController{
 
-  final ApiService _apiService = Get.find<ApiService>();
+
+  final MovieRepository movieRepository;
+
+  MovieDetailsController({ required this.movieRepository});
+
+  MovieDetailsModel? _movieDetails;
 
   final RxBool isLoading = false.obs;
 
   String? _errorMessage;
 
+  MovieDetailsModel? get movie => _movieDetails;
   String? get errorMessage => _errorMessage;
 
-  Future<Map<String, dynamic>?> fetchMovieDetails(int movieId) async {
+  Future<bool> fetchMovieDetails(int movieId) async {
 
+    debugPrint('searching cache');
+    final data = movieRepository.checkCache(movieId);
+    if(data != null) {
+      _movieDetails = data;
+      return true;
+    }
+
+
+
+    bool isSuccess = false;
     isLoading.value = true;
-    Map<String, dynamic>? details;
 
-    final ApiResponse response = await _apiService.getRequest(url: Urls.getMovieById(movieId));
 
-    if(response.isSuccess) {
+    final MovieResult result = await movieRepository.getMovieDetails(movieId);
 
+
+    if(result.isSuccess) {
+
+      isSuccess = true;
       _errorMessage = null;
 
-      details = response.body;
+      _movieDetails = result.movieDetailsModel;
 
     } else {
 
-      _errorMessage = response.errorMessage ?? "Showing error from controller";
+      _errorMessage = result.errorMessage ?? 'Showing from controller';
 
     }
 
     isLoading.value = false;
 
-    return details;
+    return isSuccess;
 
   }
 

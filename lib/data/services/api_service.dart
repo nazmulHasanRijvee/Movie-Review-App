@@ -33,12 +33,12 @@ class ApiService extends GetxService{
       } else if (response.statusCode == 401){
 
         return ApiResponse(
-            body: decodedData, statusCode: statusCode, isSuccess: false, errorMessage: 'Unauthorized'
+            body: decodedData, statusCode: statusCode, isSuccess: false, errorMessage: 'Unauthorized plz provide API key'
         );
       } else {
-        debugPrint('Error response body: $statusCode\n body => ${response.body}'); // Log the error response body for debugging
+        debugPrint('Error response status code: $statusCode\n body => ${response.body}'); // Log the error response body for debugging
         return ApiResponse(
-            body: decodedData, statusCode: statusCode, isSuccess: false
+            body: decodedData, statusCode: statusCode, isSuccess: false, errorMessage: decodedData['status_message']
         );
       }
     } catch (e) {
