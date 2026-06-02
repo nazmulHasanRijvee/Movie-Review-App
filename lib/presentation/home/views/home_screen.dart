@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:of_28_movie_review_app/app/routes/app_routes.dart';
+import 'package:of_28_movie_review_app/data/models/movie_model.dart';
+import 'package:of_28_movie_review_app/data/utils/asset_paths.dart';
 import 'package:of_28_movie_review_app/presentation/home/controllers/home_controller.dart';
 
 import '../../../core/app_colors.dart';
@@ -22,7 +24,17 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
 
     super.initState();
-    controller.fetchTrendingMovies();
+    _fetchMovies();
+  }
+
+  Future<void> _fetchMovies () async {
+
+    Future.wait([
+      controller.fetchMovies('new'),
+      controller.fetchMovies('upcoming'),
+      controller.fetchMovies('trending')
+    ]);
+
   }
 
   @override
@@ -31,9 +43,21 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppColors.primary,
       appBar: AppBar(
         centerTitle: false,
-        title: Text(
-          'Home Screen',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        title: Row(
+          mainAxisSize: .min,
+          children: [
+            Image.asset(
+                AssetPaths.movieLogo,
+                height: 50,
+                width: 50,
+                fit: .contain
+            ),
+            const SizedBox(width: 5),
+            Text(
+              'CINEPLEX',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
         backgroundColor: AppColors.primary,
         actions: [
@@ -52,42 +76,80 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
 
-      body: Column(
-        mainAxisAlignment: .center,
-        children: [
-          Obx(
-            () {
-              if (controller.isLoading.value) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return Expanded(
-                child: ListView.builder(
-                  itemCount: controller.trendingMovies.length,
-                  itemBuilder: (context, index) {
-                    return MovieCard(
-                      movie: controller.trendingMovies[index],
-                      onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => MovieDetails(
-                        //       movie: provider.trendingMovies[index],
-                        //     ),
-                        //   ),
-                        //);
-                        Get.toNamed(
-                          AppRoutes.movieDetails,
-                           arguments: controller.trendingMovies[index]
-                        );
-                      },
-                    );
-                  },
-                ),
-              );
-            },
-          ), /// End of obx
-        ],
+      body: Obx(
+         () {
+
+           if (controller.isLoading.value) {
+             return const Center(child: CircularProgressIndicator());
+           }
+
+           return SingleChildScrollView(
+
+             child: Column(
+             
+              children: [
+
+                const SizedBox(height: 20),
+
+                _buildList('New Releases', controller.newlyReleased),
+
+                _buildList('Trending Movies', controller.trendingMovies),
+
+                _buildList('Upcoming Movies', controller.upcoming),
+
+              ],
+             ),
+           );
+        }
       ),
     );
   }
+
+  Widget _buildList(String title, List<MovieModel> data) {
+
+    return Column(
+      mainAxisSize: .min,
+      crossAxisAlignment: .start,
+      children: [
+
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Text(
+            title,
+            style: TextStyle(
+                fontSize: 18,
+                fontWeight: .bold,
+                color: Colors.white
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 5),
+
+        SizedBox(
+          height: 270,
+          child: ListView.builder(
+            padding: .zero,
+            scrollDirection: Axis.horizontal,
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              return MovieCard(
+                movie: data[index],
+                onTap: () {
+                  Get.toNamed(
+                      AppRoutes.movieDetails,
+                      arguments: data[index]
+                  );
+                },
+              );
+            },
+          ),
+        ),
+
+      ],
+
+    );
+
+  }
+
 }
