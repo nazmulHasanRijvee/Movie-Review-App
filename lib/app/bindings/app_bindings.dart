@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:of_28_movie_review_app/data/repositories/movie_repository.dart';
 import 'package:of_28_movie_review_app/data/services/api_service.dart';
 
 class AppBindings implements Bindings {
@@ -7,6 +8,7 @@ class AppBindings implements Bindings {
   void dependencies() {
 
     Get.put(ApiService(), permanent: true);
+    Get.put(MovieRepository(), permanent: true);
 
   }
 
