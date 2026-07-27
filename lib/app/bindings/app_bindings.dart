@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
-import 'package:of_28_movie_review_app/data/repositories/movie_repository.dart';
-import 'package:of_28_movie_review_app/data/services/api_service.dart';
+import 'package:of_28_movie_review_app/features/movie_details/data/repositories/movie_repository.dart';
+
+import '../../core/services/api_service.dart';
+
 
 class AppBindings implements Bindings {
 
