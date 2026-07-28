@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 // import 'package:get/get.dart';
 
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/services/deep_link_services.dart';
 import '../../../../core/utils/asset_paths.dart';
 
 
@@ -18,11 +21,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
   void dispose() {
+    Get.find<DeepLinkServices>().dispose();
     super.dispose();
   }
 
