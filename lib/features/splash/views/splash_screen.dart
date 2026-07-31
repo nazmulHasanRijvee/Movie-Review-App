@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../app/routes/app_routes.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';
-import '../../../core/services/deep_link_services.dart';
+// import '../../../core/services/deep_link_services.dart';
 import '../../../core/utils/asset_paths.dart';
 
 
@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _animationController.forward();
 
-    Get.find<DeepLinkServices>().initialize();
+    //Get.find<DeepLinkServices>().initialize();
 
     Future.delayed(const Duration(seconds: 3), () {
       Get.offNamed(

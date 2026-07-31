@@ -21,7 +21,6 @@ class HomeController extends GetxController{
   String? get errorMessage => _errorMessage;
 
   Future<bool> fetchMovies(String title) async {
-
     String url = '';
 
     switch(title.toLowerCase()){

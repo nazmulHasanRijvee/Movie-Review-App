@@ -4,6 +4,7 @@ import 'package:of_28_movie_review_app/app/bindings/app_bindings.dart';
 
 import 'routes/app_pages.dart';
 import 'routes/app_routes.dart';
+import 'themes/app_theme.dart';
 
 class MovieApp extends StatelessWidget {
   const MovieApp({super.key});
@@ -13,9 +14,7 @@ class MovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Movie Review',
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: AppTheme.theme,
       initialRoute: AppRoutes.splash,
       initialBinding: AppBindings(),
       getPages: AppPages.routes,

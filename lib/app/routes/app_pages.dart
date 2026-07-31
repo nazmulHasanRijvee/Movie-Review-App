@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:of_28_movie_review_app/app/routes/app_routes.dart';
+import 'package:of_28_movie_review_app/features/auth/presentation/views/login_screen.dart';
 
+import '../../features/auth/presentation/bindings/onboarding_bindings.dart';
 import '../../features/auth/presentation/views/onboarding_screen.dart';
 import '../../features/home/presentation/bindings/home_bindings.dart';
 import '../../features/home/presentation/views/home_screen.dart';
@@ -19,7 +21,12 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.onboarding,
-      page: () => const OnBoardingScreen()
+      page: () => const OnBoardingScreen(),
+      binding: OnboardingBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.login,
+      page: () => const LoginScreen(),
     ),
     GetPage(
         name: AppRoutes.home,
