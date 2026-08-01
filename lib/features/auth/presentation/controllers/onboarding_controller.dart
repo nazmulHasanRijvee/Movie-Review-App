@@ -37,6 +37,8 @@ class OnboardingController extends GetxController {
 
     }
 
+    _isLoading.value = true;
+
     return requestToken;
 
   }

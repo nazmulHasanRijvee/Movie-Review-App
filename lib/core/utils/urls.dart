@@ -7,6 +7,8 @@ class Urls {
 
   // Authentication
   static const String requestToken = '$baseUrl/authentication/token/new';
+  static const String oAuthLink = 'https://www.themoviedb.org/authenticate';
+  static const String getSessionId = '$baseUrl/authentication/session/new';
 
   static const String trendingUrl = '$baseUrl/trending/all/week';
   static const String newlyReleased = '$baseUrl/movie/now_playing';

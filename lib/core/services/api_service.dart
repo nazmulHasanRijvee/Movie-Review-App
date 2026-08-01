@@ -47,7 +47,7 @@ class ApiService extends GetxService{
 
   }
 
-  static Future<ApiResponse> postRequest ({required String url, required Map<String, dynamic>? body}) async {
+  Future<ApiResponse> postRequest ({required String url, required Map<String, dynamic>? body}) async {
 
     try {
 
@@ -56,8 +56,9 @@ class ApiService extends GetxService{
       Uri uri = Uri.parse(url);
 
       final headers = {
-        "Accept": 'application/json',
-        'Authorization' : AppStrings.authorizationToken
+        "Authorization" : AppStrings.authorizationToken,
+        "Accept": "application/json",
+        "Content-Type" : "application/json"
       };
 
       final Response response = await post(

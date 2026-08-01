@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
-import 'package:of_28_movie_review_app/app/routes/app_routes.dart';
-import 'package:of_28_movie_review_app/features/auth/presentation/views/login_screen.dart';
 
+
+import '../../features/auth/presentation/bindings/login_bindings.dart';
 import '../../features/auth/presentation/bindings/onboarding_bindings.dart';
+import '../../features/auth/presentation/views/login_screen.dart';
 import '../../features/auth/presentation/views/onboarding_screen.dart';
 import '../../features/home/presentation/bindings/home_bindings.dart';
 import '../../features/home/presentation/views/home_screen.dart';
@@ -11,6 +12,7 @@ import '../../features/movie_details/presentation/views/movie_details_screen.dar
 import '../../features/search_movie/presentation/bindings/search_bindings.dart';
 import '../../features/search_movie/presentation/views/search_screen.dart';
 import '../../features/splash/views/splash_screen.dart';
+import 'app_routes.dart';
 
 class AppPages {
 
@@ -27,6 +29,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.login,
       page: () => const LoginScreen(),
+      binding: LoginBindings()
     ),
     GetPage(
         name: AppRoutes.home,
