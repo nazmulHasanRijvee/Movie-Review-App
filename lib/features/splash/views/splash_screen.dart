@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:of_28_movie_review_app/app/controllers/auth_controller.dart';
 
 import '../../../app/routes/app_routes.dart';
 import '../../../core/constants/app_colors.dart';
@@ -34,11 +35,24 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     //Get.find<DeepLinkServices>().initialize();
 
-    Future.delayed(const Duration(seconds: 3), () {
-      Get.offNamed(
-        AppRoutes.onboarding
-      );
-    });
+    Future.delayed(
+        const Duration(seconds: 3),
+        _moveTo
+    );
+
+  }
+
+  Future<void> _moveTo () async {
+
+
+    final isLoggedIn = await Get.find<AuthController>().isUserLoggedIn();
+
+    if(isLoggedIn) {
+      Get.offNamed(AppRoutes.home);
+    } else {
+      Get.offNamed(AppRoutes.onboarding);
+    }
+
   }
 
   @override

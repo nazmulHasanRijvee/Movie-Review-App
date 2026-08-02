@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:of_28_movie_review_app/app/routes/app_routes.dart';
 import 'package:of_28_movie_review_app/features/shared/data/model/movie_model.dart';
 
+import '../../../../app/controllers/auth_controller.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/asset_paths.dart';
+import '../../../shared/data/model/user_model.dart';
 import '../controllers/home_controller.dart';
 import '../widgets/movie_card.dart';
 
@@ -19,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   final controller = Get.find<HomeController>();
+  final  UserModel? user = Get.find<AuthController>().userModel;
 
   @override
   void initState() {
@@ -54,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(width: 5),
             Text(
-              'CINEPLEX',
+              'CINEPLEX, Hi ${user?.name ?? 'Stranger'}',
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
           ],

@@ -6,7 +6,9 @@ import 'package:of_28_movie_review_app/core/services/api_service.dart';
 import 'package:of_28_movie_review_app/core/services/deep_link_services.dart';
 import 'package:of_28_movie_review_app/core/services/url_launcher_service.dart';
 
+import '../../../../app/controllers/auth_controller.dart';
 import '../../../../core/utils/urls.dart';
+import '../../../shared/data/model/user_model.dart';
 
 class LoginController extends GetxController {
 
@@ -21,9 +23,10 @@ class LoginController extends GetxController {
   StreamSubscription<Uri>? streamSubscription;
 
   // Dependency Injection
-  UrlLauncherService get urlLauncherService => Get.find<UrlLauncherService>();
-  DeepLinkServices get deepLinkServices => Get.find<DeepLinkServices>();
-  ApiService get apiService => Get.find<ApiService>();
+  UrlLauncherService get _urlLauncherService => Get.find<UrlLauncherService>();
+  DeepLinkServices get _deepLinkServices => Get.find<DeepLinkServices>();
+  ApiService get _apiService => Get.find<ApiService>();
+  AuthController get _authController => Get.find<AuthController>();
 
   // getter methods to ensure encapsulation
   bool get isLoading => _isLoading.value;
@@ -40,12 +43,12 @@ class LoginController extends GetxController {
     // Prevent duplicate Stream listeners
     await streamSubscription?.cancel();
 
-    streamSubscription = deepLinkServices.uriStream
+    streamSubscription = _deepLinkServices.uriStream
         .listen(_handleAuthDeepLink);
 
-    await urlLauncherService.launchAuthUrl(requestToken);
+    await _urlLauncherService.launchAuthUrl(requestToken);
 
-    final initialUri = await deepLinkServices.initialUri;
+    final initialUri = await _deepLinkServices.initialUri;
     if(initialUri != null){
       _handleAuthDeepLink(initialUri);
     }
@@ -73,7 +76,7 @@ class LoginController extends GetxController {
       return;
     }
 
-    final response = await apiService.postRequest(
+    final response = await _apiService.postRequest(
         url: Urls.getSessionId,
         body: {
           "request_token" : requestToken.trim()
@@ -81,7 +84,7 @@ class LoginController extends GetxController {
     );
 
     if(response.isSuccess) {
-      // Save session id to auth controller
+      await getUserData(response.body['session_id']);
       debugPrint('Session ID: ${response.body['session_id']}');
     }
 
@@ -109,6 +112,24 @@ class LoginController extends GetxController {
     if (!(_authCompleter?.isCompleted ?? true)) {
       _authCompleter?.complete(success);
     }
+  }
+
+  Future<void> getUserData(String sessionId) async {
+
+    // Get user details
+    final apiResponse = await _apiService.getRequest(
+        url: Urls.getUserDetails(sessionId)
+    );
+
+    if(!apiResponse.isSuccess) {
+      debugPrint('Error getting user details, ${apiResponse.statusCode}');
+      return;
+    }
+
+    // Save session id and user details in the AuthController
+    final UserModel user = UserModel.fromJson(apiResponse.body);
+    _authController.saveUserData(user, sessionId);
+
   }
 
   @override

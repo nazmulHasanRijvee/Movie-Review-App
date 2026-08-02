@@ -9,7 +9,8 @@ class AppStrings {
   // You should store your TMDB authorization key here.
   // For security, this is typically loaded at runtime via environment variables natively.
   static final apiKey = dotenv.env['API_TOKEN'] ?? '';
-  static final String authorizationToken =
+  // getter method to get a fresh token everytime it is called instead of snapshot
+  static String get authorizationToken =>
       'Bearer $apiKey';
 
   // Onboarding screen
