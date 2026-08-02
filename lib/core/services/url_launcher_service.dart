@@ -8,7 +8,7 @@ class UrlLauncherService extends GetxService {
 
   Future<void> launchAuthUrl(String requestToken) async {
 
-    String redirectTo = 'redirect_to=myapp://auth';
+    String redirectTo = 'redirect_to=cinephiler://auth';
 
     final authUri = Uri.parse('${Urls.oAuthLink}/$requestToken?$redirectTo');
 

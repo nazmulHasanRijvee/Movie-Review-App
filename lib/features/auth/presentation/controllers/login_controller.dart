@@ -8,7 +8,7 @@ import 'package:of_28_movie_review_app/core/services/url_launcher_service.dart';
 
 import '../../../../core/utils/urls.dart';
 
-class LoginController extends GetxController{
+class LoginController extends GetxController {
 
   // For showing loading state when OAuth is in progress
   final RxBool _isLoading = false.obs;
@@ -29,9 +29,9 @@ class LoginController extends GetxController{
   bool get isLoading => _isLoading.value;
   String? get error => errorMessage;
 
-  /// Takes a request_token, using OAuth validates the request_token,
-  // listens for Deep Links using app_links plugin and calls an API to exchange the
-  // request_token for a session_id. If it succeeds saves the session_id in the AuthController
+  /// Takes a request_token, launches the OAuth URL for validating the token,
+  // listens for Deep Links using app_links plugin and completes with a bool value
+  // when _authCompleter?.complete(...) is called
   Future<bool> startAuthentication(String requestToken) async {
 
     _isLoading.value = true;
@@ -54,8 +54,9 @@ class LoginController extends GetxController{
 
   }
 
-  // Handle Deep Links, parse the link and if approved then Call the API for exchanging
+  /// Handle Deep Links, parse the link and if approved then Call the API for exchanging
   // the request_token for a session_id and save it in the AuthController
+  // and If succeeds complete the _authCompleter with true else false
   Future<void> _handleAuthDeepLink(Uri uri) async {
 
     if(uri.host != 'auth') return;
@@ -89,6 +90,9 @@ class LoginController extends GetxController{
     _completeAuth(response.isSuccess);
   }
 
+  /// Helper method toc clean up when auth process is  stopped. Sets the
+  // loading to false, cancels the stream subscription and sets it to null,
+  // ensuring no duplicate streams
   Future<void> _stopAuth() async {
 
     _isLoading.value = false;
@@ -98,6 +102,8 @@ class LoginController extends GetxController{
     streamSubscription = null;
   }
 
+  /// Helper method to complete the _authCompleter (startAuth method) with a value
+  // if it isn't completed yet
   void _completeAuth(bool success) {
     // if completer is not null and not completed, then complete it
     if (!(_authCompleter?.isCompleted ?? true)) {
