@@ -4,9 +4,6 @@ import 'package:get/get.dart';
 import '../widgets/login_background.dart';
 import '../widgets/login_card.dart';
 import '../widgets/movie_app_logo.dart';
-// import 'package:get/get_core/src/get_main.dart';
-// import 'package:get/get_navigation/src/extension_navigation.dart';
-
 
 class LoginScreen extends StatefulWidget {
 

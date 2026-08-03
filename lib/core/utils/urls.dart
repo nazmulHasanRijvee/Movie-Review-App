@@ -10,6 +10,9 @@ class Urls {
   static const String oAuthLink = 'https://www.themoviedb.org/authenticate';
   static const String getSessionId = '$baseUrl/authentication/session/new';
 
+  // log out and delete session id
+  static const String deleteSessionId = '$baseUrl/authentication/session';
+
   // User Details
   static String getUserDetails(String sessionId) => '$baseUrl/account/null?session_id=$sessionId';
   // /account/null?session_id

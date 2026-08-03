@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
+import 'package:of_28_movie_review_app/app/controllers/auth_controller.dart';
 import 'package:of_28_movie_review_app/features/shared/data/model/movie_model.dart';
-
-import '../../../../core/services/api_service.dart';
-import '../../../../core/utils/urls.dart';
+import 'package:of_28_movie_review_app/core/services/api_service.dart';
+import 'package:of_28_movie_review_app/core/utils/urls.dart';
 
 class HomeController extends GetxController{
 
-  final ApiService _apiService = Get.find<ApiService>();
+  // DI
+  ApiService get _apiService => Get.find<ApiService>();
+  AuthController get _authController => Get.find<AuthController>();
 
   List<MovieModel> _trendingMovies = [];
   List<MovieModel> _newlyReleased = [];
@@ -67,6 +69,36 @@ class HomeController extends GetxController{
     }
 
     if(_trendingMovies.isNotEmpty && _newlyReleased.isNotEmpty && _upcoming.isNotEmpty) _isLoading.value = false;
+
+    return isSuccess;
+
+  }
+
+  Future<bool> logOut() async {
+
+    bool isSuccess = false;
+
+    final sessionId = _authController.accessSessionId;
+
+    if(sessionId == null) return false;
+
+    final ApiResponse apiResponse = await _apiService.deleteRequest(
+        url: Urls.deleteSessionId,
+        body: {
+          'session_id' : sessionId
+        }
+    );
+
+    if(apiResponse.isSuccess) {
+
+      isSuccess = true;
+      await _authController.clearUserData();
+
+    } else {
+
+      _errorMessage = apiResponse.errorMessage ?? 'Showing error from controller';
+
+    }
 
     return isSuccess;
 

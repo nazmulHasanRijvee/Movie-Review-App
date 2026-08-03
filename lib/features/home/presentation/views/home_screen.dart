@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:of_28_movie_review_app/app/routes/app_routes.dart';
 import 'package:of_28_movie_review_app/features/shared/data/model/movie_model.dart';
-
-import '../../../../app/controllers/auth_controller.dart';
-import '../../../../core/constants/app_colors.dart';
-import '../../../../core/utils/asset_paths.dart';
-import '../../../shared/data/model/user_model.dart';
-import '../controllers/home_controller.dart';
-import '../widgets/movie_card.dart';
+import 'package:of_28_movie_review_app/app/controllers/auth_controller.dart';
+import 'package:of_28_movie_review_app/core/constants/app_colors.dart';
+import 'package:of_28_movie_review_app/core/utils/asset_paths.dart';
+import 'package:of_28_movie_review_app/features/shared/data/model/user_model.dart';
+import 'package:of_28_movie_review_app/features/home/presentation/controllers/home_controller.dart';
+import 'package:of_28_movie_review_app/features/home/presentation/widgets/movie_card.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -22,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final controller = Get.find<HomeController>();
   final  UserModel? user = Get.find<AuthController>().userModel;
+
 
   @override
   void initState() {
@@ -58,7 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(width: 5),
             Text(
               'CINEPLEX, Hi ${user?.name ?? 'Stranger'}',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle( // Add text theme
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                fontSize: 14
+              ),
             ),
           ],
         ),
@@ -66,15 +70,19 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => SearchScreen()),
-              // );
               Get.toNamed(
                 AppRoutes.searchMovie
               );
             },
             icon: Icon(Icons.search, color: Colors.white),
+          ),
+          IconButton(
+            onPressed: () async {
+              final isSuccess = await controller.logOut();
+              if(!isSuccess) return;
+              Get.offAllNamed(AppRoutes.onboarding);
+            },
+            icon: Icon(Icons.exit_to_app_rounded, color: Colors.white),
           ),
         ],
       ),

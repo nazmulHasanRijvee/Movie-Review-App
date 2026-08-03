@@ -12,6 +12,7 @@ class ButtonLoadingIndicator extends StatelessWidget {
         height: 30,
         child: CircularProgressIndicator( // RepaintBoundary for optimization
           strokeWidth: 4,
+          backgroundColor: Colors.yellowAccent,
         )
     );
   }

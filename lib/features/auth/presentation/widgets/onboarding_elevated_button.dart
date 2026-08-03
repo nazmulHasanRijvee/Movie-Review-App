@@ -43,13 +43,4 @@ class OnboardingElevatedButton extends StatelessWidget {
 
   }
 
-  SizedBox buildLoadingIndicator() {
-    return SizedBox(
-        width: 30,
-        height: 30,
-        child: CircularProgressIndicator(
-          strokeWidth: 4,
-        )
-    );
-  }
 }

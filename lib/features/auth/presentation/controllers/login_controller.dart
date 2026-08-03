@@ -128,7 +128,7 @@ class LoginController extends GetxController {
 
     // Save session id and user details in the AuthController
     final UserModel user = UserModel.fromJson(apiResponse.body);
-    _authController.saveUserData(user, sessionId);
+    await _authController.saveUserData(user, sessionId);
 
   }
 

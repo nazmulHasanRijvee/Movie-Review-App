@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/urls.dart';
-import '../../../shared/data/model/movie_model.dart';
+import 'package:of_28_movie_review_app/features/shared/data/model/movie_model.dart';
+import 'package:of_28_movie_review_app/core/utils/urls.dart';
 
 class MovieCard extends StatelessWidget {
+
   const MovieCard({super.key, required this.movie, required this.onTap});
   final MovieModel movie;
   final VoidCallback onTap;
