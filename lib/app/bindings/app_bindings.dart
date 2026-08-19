@@ -14,7 +14,7 @@ class AppBindings implements Bindings {
   @override
   Future<void> dependencies() async {
 
-    await Get.putAsync(() async {
+    Get.putAsync(() async {
 
       final sharedPreferences = await SharedPreferences.getInstance();
 

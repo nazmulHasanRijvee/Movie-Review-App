@@ -10,6 +10,3 @@ void main() async {
 
   runApp(const MovieApp());
 }
-
-
-

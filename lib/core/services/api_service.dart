@@ -149,5 +149,4 @@ class ApiResponse {
     this.errorMessage = 'Showing error from ApiResponse model'
   });
 
-
 }
