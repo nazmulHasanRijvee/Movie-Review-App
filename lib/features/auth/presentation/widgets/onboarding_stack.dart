@@ -1,4 +1,4 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:of_28_movie_review_app/features/auth/presentation/widgets/movie_app_logo.dart';
 
 import '../../../../core/utils/asset_paths.dart';

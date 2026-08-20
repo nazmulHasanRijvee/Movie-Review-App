@@ -66,8 +66,8 @@ class HomeController extends GetxController {
     if (_trendingMovies.isNotEmpty &&
         _newlyReleased.isNotEmpty &&
         _upcoming.isNotEmpty) {
-          _isLoading.value = false;
-        }
+      _isLoading.value = false;
+    }
 
     return isSuccess;
   }

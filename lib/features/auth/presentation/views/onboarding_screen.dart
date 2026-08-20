@@ -1,4 +1,4 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:of_28_movie_review_app/features/auth/presentation/widgets/onboarding_elevated_button.dart';
 import 'package:of_28_movie_review_app/features/auth/presentation/widgets/onboarding_stack.dart';

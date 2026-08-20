@@ -1,4 +1,4 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:of_28_movie_review_app/features/shared/data/model/movie_model.dart';
 
 import '../../../../core/utils/urls.dart';
