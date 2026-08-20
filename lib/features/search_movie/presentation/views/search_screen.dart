@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:get/get.dart';
 import 'package:of_28_movie_review_app/app/routes/app_routes.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../controllers/search_movie_controller.dart';
 import '../widgets/movie_searched_card.dart';
-
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -15,11 +14,9 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-
   final TextEditingController _searchController = TextEditingController();
 
   final SearchMovieController controller = Get.find<SearchMovieController>();
-
 
   @override
   void dispose() {
@@ -29,7 +26,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: AppColors.primary,
 
@@ -67,36 +63,33 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               onChanged: (value) {
-               controller.searchMovies(value);
+                controller.searchMovies(value);
               },
             ),
             Expanded(
-              child: Obx(
-                () {
-                  if (controller.isLoading.value) {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                  return ListView.builder(
-                    itemCount: controller.searchResults.length,
-                    itemBuilder: (context, index) {
-                      return MovieSearchedCard(
-                        movie: controller.searchResults[index],
-                        onTap: () {
-                          Get.toNamed(
-                            AppRoutes.movieDetails,
-                             arguments: controller.searchResults[index]
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
-              ),
+              child: Obx(() {
+                if (controller.isLoading.value) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                return ListView.builder(
+                  itemCount: controller.searchResults.length,
+                  itemBuilder: (context, index) {
+                    return MovieSearchedCard(
+                      movie: controller.searchResults[index],
+                      onTap: () {
+                        Get.toNamed(
+                          AppRoutes.movieDetails,
+                          arguments: controller.searchResults[index],
+                        );
+                      },
+                    );
+                  },
+                );
+              }),
             ),
           ],
         ),
       ),
     );
-
   }
 }

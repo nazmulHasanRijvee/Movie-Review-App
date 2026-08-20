@@ -1,14 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:get/get.dart';
 import 'package:of_28_movie_review_app/features/movie_details/data/model/movie_details_model.dart';
 import 'package:of_28_movie_review_app/features/movie_details/data/repositories/movie_repository.dart';
 
 import '../../data/model/movie_result.dart';
 
-
-class MovieDetailsController extends GetxController{
-
-
+class MovieDetailsController extends GetxController {
   final MovieRepository movieRepository;
 
   MovieDetailsController({required this.movieRepository});
@@ -23,40 +20,29 @@ class MovieDetailsController extends GetxController{
   String? get errorMessage => _errorMessage;
 
   Future<bool> fetchMovieDetails(int movieId) async {
-
     debugPrint('searching cache');
     final data = movieRepository.checkCache(movieId);
-    if(data != null) {
+    if (data != null) {
       _movieDetails = data;
       return true;
     }
 
-
-
     bool isSuccess = false;
     isLoading.value = true;
 
-
     final MovieResult result = await movieRepository.getMovieDetails(movieId);
 
-
-    if(result.isSuccess) {
-
+    if (result.isSuccess) {
       isSuccess = true;
       _errorMessage = null;
 
       _movieDetails = result.movieDetailsModel;
-
     } else {
-
       _errorMessage = result.errorMessage ?? 'Showing from controller';
-
     }
 
     isLoading.value = false;
 
     return isSuccess;
-
   }
-
 }

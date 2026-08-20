@@ -1,7 +1,6 @@
 import 'package:of_28_movie_review_app/domain/entities/movie_details.dart';
 
 class MovieDetailsModel extends MovieDetails {
-
   MovieDetailsModel({
     required super.id,
     required super.title,

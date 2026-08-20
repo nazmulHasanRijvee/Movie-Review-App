@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:of_28_movie_review_app/features/shared/data/model/movie_model.dart';
 import 'package:of_28_movie_review_app/core/utils/urls.dart';
 
 class MovieCard extends StatelessWidget {
-
   const MovieCard({super.key, required this.movie, required this.onTap});
   final MovieModel movie;
   final VoidCallback onTap;
@@ -25,7 +24,8 @@ class MovieCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 image: DecorationImage(
-                  image: NetworkImage( /// Replace with CachedNetwork image
+                  image: NetworkImage(
+                    /// Replace with CachedNetwork image
                     '${Urls.imageBaseUrl}${movie.posterPath}',
                   ),
                   fit: BoxFit.cover,

@@ -4,8 +4,7 @@ import 'package:of_28_movie_review_app/features/shared/data/model/movie_model.da
 import 'package:of_28_movie_review_app/core/services/api_service.dart';
 import 'package:of_28_movie_review_app/core/utils/urls.dart';
 
-class HomeController extends GetxController{
-
+class HomeController extends GetxController {
   // DI
   ApiService get _apiService => Get.find<ApiService>();
   AuthController get _authController => Get.find<AuthController>();
@@ -25,7 +24,7 @@ class HomeController extends GetxController{
   Future<bool> fetchMovies(String title) async {
     String url = '';
 
-    switch(title.toLowerCase()){
+    switch (title.toLowerCase()) {
       case 'trending':
         url = Urls.trendingUrl;
       case 'new':
@@ -36,22 +35,20 @@ class HomeController extends GetxController{
         url = Urls.trendingUrl;
     }
 
-    bool isSuccess= false;
-    if(_isLoading.value != true) _isLoading.value = true;
+    bool isSuccess = false;
+    if (_isLoading.value != true) _isLoading.value = true;
 
     final ApiResponse apiResponse = await _apiService.getRequest(url: url);
 
-    if(apiResponse.isSuccess) {
-
+    if (apiResponse.isSuccess) {
       isSuccess = true;
       _errorMessage = null;
 
-      final data = apiResponse.body['results'].map<MovieModel>(
-              (e) => MovieModel.fromJson(e)
-      ).toList();
+      final data = apiResponse.body['results']
+          .map<MovieModel>((e) => MovieModel.fromJson(e))
+          .toList();
 
-
-      switch(title){
+      switch (title) {
         case 'trending':
           _trendingMovies = data;
         case 'new':
@@ -61,48 +58,40 @@ class HomeController extends GetxController{
         default:
           _trendingMovies = data;
       }
-
     } else {
-
-      _errorMessage = apiResponse.errorMessage ?? 'Showing error from controller';
-
+      _errorMessage =
+          apiResponse.errorMessage ?? 'Showing error from controller';
     }
 
-    if(_trendingMovies.isNotEmpty && _newlyReleased.isNotEmpty && _upcoming.isNotEmpty) _isLoading.value = false;
+    if (_trendingMovies.isNotEmpty &&
+        _newlyReleased.isNotEmpty &&
+        _upcoming.isNotEmpty) {
+          _isLoading.value = false;
+        }
 
     return isSuccess;
-
   }
 
   Future<bool> logOut() async {
-
     bool isSuccess = false;
 
     final sessionId = _authController.accessSessionId;
 
-    if(sessionId == null) return false;
+    if (sessionId == null) return false;
 
     final ApiResponse apiResponse = await _apiService.deleteRequest(
-        url: Urls.deleteSessionId,
-        body: {
-          'session_id' : sessionId
-        }
+      url: Urls.deleteSessionId,
+      body: {'session_id': sessionId},
     );
 
-    if(apiResponse.isSuccess) {
-
+    if (apiResponse.isSuccess) {
       isSuccess = true;
       await _authController.clearUserData();
-
     } else {
-
-      _errorMessage = apiResponse.errorMessage ?? 'Showing error from controller';
-
+      _errorMessage =
+          apiResponse.errorMessage ?? 'Showing error from controller';
     }
 
     return isSuccess;
-
   }
-
-
 }

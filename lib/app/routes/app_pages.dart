@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-
 import '../../features/auth/presentation/bindings/login_bindings.dart';
 import '../../features/auth/presentation/bindings/onboarding_bindings.dart';
 import '../../features/auth/presentation/views/login_screen.dart';
@@ -15,12 +14,8 @@ import '../../features/splash/views/splash_screen.dart';
 import 'app_routes.dart';
 
 class AppPages {
-
   static final List<GetPage> routes = [
-    GetPage(
-      name: AppRoutes.splash,
-      page: () => const SplashScreen()
-    ),
+    GetPage(name: AppRoutes.splash, page: () => const SplashScreen()),
     GetPage(
       name: AppRoutes.onboarding,
       page: () => const OnBoardingScreen(),
@@ -29,23 +24,22 @@ class AppPages {
     GetPage(
       name: AppRoutes.login,
       page: () => const LoginScreen(),
-      binding: LoginBindings()
+      binding: LoginBindings(),
     ),
     GetPage(
-        name: AppRoutes.home,
-        page: () => const HomeScreen(),
-        binding: HomeBindings()
+      name: AppRoutes.home,
+      page: () => const HomeScreen(),
+      binding: HomeBindings(),
     ),
     GetPage(
-        name: AppRoutes.movieDetails,
-        page: () => const MovieDetailsScreen(),
-        binding: MovieDetailsBindings()
+      name: AppRoutes.movieDetails,
+      page: () => const MovieDetailsScreen(),
+      binding: MovieDetailsBindings(),
     ),
     GetPage(
-        name: AppRoutes.searchMovie,
-        page: () => const SearchScreen(),
-        binding: SearchBindings()
-    )
+      name: AppRoutes.searchMovie,
+      page: () => const SearchScreen(),
+      binding: SearchBindings(),
+    ),
   ];
-
 }

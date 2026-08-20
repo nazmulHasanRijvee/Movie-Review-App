@@ -1,5 +1,4 @@
 class Urls {
-
   Urls._();
 
   static const String baseUrl = 'https://api.themoviedb.org/3';
@@ -14,12 +13,13 @@ class Urls {
   static const String deleteSessionId = '$baseUrl/authentication/session';
 
   // User Details
-  static String getUserDetails(String sessionId) => '$baseUrl/account/null?session_id=$sessionId';
+  static String getUserDetails(String sessionId) =>
+      '$baseUrl/account/null?session_id=$sessionId';
   // /account/null?session_id
 
   // Fetch an account detail using the account_id
-  static String fetchAccountDetails(String? accountId) => '$baseUrl/account/$accountId';
-
+  static String fetchAccountDetails(String? accountId) =>
+      '$baseUrl/account/$accountId';
 
   static const String trendingUrl = '$baseUrl/trending/all/week';
   static const String newlyReleased = '$baseUrl/movie/now_playing';
@@ -27,6 +27,6 @@ class Urls {
 
   static String getMovieById(int id) => '$baseUrl/movie/$id';
 
-  static String searchMovieUrl (String query) => '$baseUrl/search/movie?query=$query';
-
+  static String searchMovieUrl(String query) =>
+      '$baseUrl/search/movie?query=$query';
 }

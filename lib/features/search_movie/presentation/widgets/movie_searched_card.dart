@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:of_28_movie_review_app/features/shared/data/model/movie_model.dart';
 
 import '../../../../core/utils/urls.dart';
 
-
-
-
 class MovieSearchedCard extends StatelessWidget {
-  const MovieSearchedCard({super.key, required this.movie, required this.onTap});
+  const MovieSearchedCard({
+    super.key,
+    required this.movie,
+    required this.onTap,
+  });
   final MovieModel movie;
   final VoidCallback onTap;
 

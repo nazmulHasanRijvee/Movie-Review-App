@@ -1,8 +1,8 @@
 class AppRoutes {
-  static const splash  = '/splash';
-  static const onboarding  = '/onboarding';
-  static const login   = '/login';
-  static const home    = '/home';
+  static const splash = '/splash';
+  static const onboarding = '/onboarding';
+  static const login = '/login';
+  static const home = '/home';
   static const movieDetails = '/movie-details';
   static const searchMovie = '/search-movie';
   static const profile = '/profile/:userId'; // dynamic

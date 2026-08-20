@@ -5,7 +5,6 @@ import '../../../../core/services/api_service.dart';
 import '../../../../core/utils/urls.dart';
 
 class OnboardingController extends GetxController {
-
   final ApiService apiService;
 
   OnboardingController({required this.apiService});
@@ -16,30 +15,25 @@ class OnboardingController extends GetxController {
   bool get isLoading => _isLoading.value;
   String? get errorMessage => _errorMessage;
 
-
   Future<String?> getRequestToken() async {
-
     _isLoading.value = true;
     String? requestToken;
 
-    final ApiResponse apiResponse = await apiService.getRequest(url: Urls.requestToken);
+    final ApiResponse apiResponse = await apiService.getRequest(
+      url: Urls.requestToken,
+    );
 
-    if(apiResponse.isSuccess && apiResponse.body['success']) {
-
+    if (apiResponse.isSuccess && apiResponse.body['success']) {
       requestToken = apiResponse.body['request_token'];
 
       _errorMessage = null;
-
     } else {
-
-      _errorMessage = apiResponse.errorMessage ?? 'Showing error from controller';
-
+      _errorMessage =
+          apiResponse.errorMessage ?? 'Showing error from controller';
     }
 
     _isLoading.value = false;
 
     return requestToken;
-
   }
-
 }

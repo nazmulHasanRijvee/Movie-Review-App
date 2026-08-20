@@ -1,13 +1,12 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/shared/data/model/user_model.dart';
 
 class AuthController extends GetxService {
-
   // Dependency Injection
   final SharedPreferences sharedPreferences;
 
@@ -26,7 +25,7 @@ class AuthController extends GetxService {
     await sharedPreferences.setString(_accessSessionIdKey, sessionId);
     await sharedPreferences.setString(
       _userModelKey,
-      jsonEncode(model.toJson())
+      jsonEncode(model.toJson()),
     );
     _accessSessionId = sessionId;
     _userModel = model;
@@ -34,15 +33,18 @@ class AuthController extends GetxService {
 
   Future<void> getUserData() async {
     String? sessionId = sharedPreferences.getString(_accessSessionIdKey);
-    if(sessionId != null) {
+    if (sessionId != null) {
       String? userData = sharedPreferences.getString(_userModelKey);
       _userModel = UserModel.fromJson(jsonDecode(userData!));
       _accessSessionId = sessionId;
     }
   }
 
-  Future<void> updateUserData(UserModel model) async{
-    await sharedPreferences.setString(_userModelKey, jsonEncode(model.toJson()));
+  Future<void> updateUserData(UserModel model) async {
+    await sharedPreferences.setString(
+      _userModelKey,
+      jsonEncode(model.toJson()),
+    );
     _userModel = model;
   }
 
@@ -50,17 +52,16 @@ class AuthController extends GetxService {
     String? sessionId = sharedPreferences.getString(_accessSessionIdKey);
     debugPrint('SessionId: $sessionId');
     String? userData = sharedPreferences.getString(_userModelKey);
-    if(sessionId != null) _accessSessionId = sessionId;
-    if(userData != null) _userModel = UserModel.fromJson(jsonDecode(userData));
+    if (sessionId != null) _accessSessionId = sessionId;
+    if (userData != null) _userModel = UserModel.fromJson(jsonDecode(userData));
     return sessionId != null;
   }
 
-  Future<void> clearUserData () async {
+  Future<void> clearUserData() async {
     await sharedPreferences.remove(_accessSessionIdKey);
     await sharedPreferences.remove(_userModelKey);
     // or use .clear() to remove all keys
     _accessSessionId = null;
     _userModel = null;
   }
-
 }

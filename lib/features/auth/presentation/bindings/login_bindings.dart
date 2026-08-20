@@ -6,19 +6,15 @@ import 'package:of_28_movie_review_app/core/services/deep_link_services.dart';
 import 'package:of_28_movie_review_app/core/services/url_launcher_service.dart';
 import 'package:of_28_movie_review_app/features/auth/presentation/controllers/login_controller.dart';
 
-class LoginBindings extends Bindings{
-
+class LoginBindings extends Bindings {
   @override
   void dependencies() {
-
     Get.put<UrlLauncherService>(UrlLauncherService());
 
     final appLinks = AppLinks();
 
     Get.put<DeepLinkServices>(DeepLinkServices(appLinks: appLinks));
 
-    Get.lazyPut(()=> LoginController());
-
+    Get.lazyPut(() => LoginController());
   }
-
 }

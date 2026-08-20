@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:get/get.dart';
 
 import '../widgets/login_background.dart';
@@ -6,7 +6,6 @@ import '../widgets/login_card.dart';
 import '../widgets/movie_app_logo.dart';
 
 class LoginScreen extends StatefulWidget {
-
   const LoginScreen({super.key});
 
   @override
@@ -14,7 +13,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -42,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-      )
+      ),
     );
   }
 
@@ -51,14 +49,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return Row(
       spacing: 10,
       children: [
-        MovieAppLogo(
-            width: 65,
-            height: 65
-        ),
-        Text('CINEPHILER', style: context.theme.textTheme.bodyLarge)
+        MovieAppLogo(width: 65, height: 65),
+        Text('CINEPHILER', style: context.theme.textTheme.bodyLarge),
       ],
-
     );
   }
-
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:get/get.dart';
 import 'package:of_28_movie_review_app/app/controllers/auth_controller.dart';
 
@@ -8,7 +8,6 @@ import '../../../core/constants/app_strings.dart';
 // import '../../../core/services/deep_link_services.dart';
 import '../../../core/utils/asset_paths.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -16,7 +15,8 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
 
@@ -35,24 +35,17 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     //Get.find<DeepLinkServices>().initialize();
 
-    Future.delayed(
-        const Duration(seconds: 3),
-        _moveTo
-    );
-
+    Future.delayed(const Duration(seconds: 3), _moveTo);
   }
 
-  Future<void> _moveTo () async {
-
-
+  Future<void> _moveTo() async {
     final isLoggedIn = await Get.find<AuthController>().isUserLoggedIn();
 
-    if(isLoggedIn) {
+    if (isLoggedIn) {
       Get.offNamed(AppRoutes.home);
     } else {
       Get.offNamed(AppRoutes.onboarding);
     }
-
   }
 
   @override
