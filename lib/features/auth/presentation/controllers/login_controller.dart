@@ -24,9 +24,6 @@ class LoginController extends GetxController {
   /// Lifecycle observer.
   AppLifecycleListener? _lifecycleListener;
 
-  /// Whether the OAuth flow is currently running.
-  bool _authInProgress = false;
-
   /// Whether the app went to the background while OAuth was running.
   bool _appWentToBackground = false;
 
@@ -48,10 +45,9 @@ class LoginController extends GetxController {
   // when _authCompleter?.complete(...) is called
   Future<bool> startAuthentication(String requestToken) async {
     /// Prevent starting another OAuth flow while one is already running
-    if (_authInProgress) return false;
+    if (_isLoading.value) return false;
 
     // Reset OAuth state.
-    _authInProgress = true;
     _appWentToBackground = false;
     _callbackReceived = false;
 
@@ -82,7 +78,7 @@ class LoginController extends GetxController {
   // the request_token for a session_id and save it in the AuthController
   // and If succeeds complete the _authCompleter with true else false
   Future<void> _handleAuthDeepLink(Uri uri) async {
-    if (!_authInProgress) return;
+    if (!_isLoading.value) return;
 
     if (uri.host != 'auth') return;
 
@@ -128,7 +124,7 @@ class LoginController extends GetxController {
   void _handleLifecycleState(AppLifecycleState state) {
     debugPrint('App lifecycle state: $state');
 
-    if (!_authInProgress) {
+    if (!_isLoading.value) {
       return;
     }
 
@@ -169,7 +165,6 @@ class LoginController extends GetxController {
   // loading to false, cancels the stream subscription and sets it to null,
   // ensuring no duplicate streams
   Future<void> _stopAuth() async {
-    _authInProgress = false;
     _isLoading.value = false;
 
     // Stop listening, clean up Stream to prevent memory leak
