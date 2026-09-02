@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:of_28_movie_review_app/core/services/api_service.dart';
-import 'package:of_28_movie_review_app/core/services/deep_link_services.dart';
-import 'package:of_28_movie_review_app/core/services/url_launcher_service.dart';
+import 'package:of_28_movie_review_app/core/services/deep_links/deep_link_services.dart';
+import 'package:of_28_movie_review_app/core/services/url_launcher/url_launcher_service.dart';
 
 import '../../../../app/controllers/auth_controller.dart';
 import '../../../../core/utils/urls.dart';

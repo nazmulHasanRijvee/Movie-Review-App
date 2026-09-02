@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:of_28_movie_review_app/features/auth/presentation/widgets/onboarding_elevated_button.dart';
 import 'package:of_28_movie_review_app/features/auth/presentation/widgets/onboarding_stack.dart';
+import 'package:of_28_movie_review_app/features/shared/presentation/widgets/show_snackbar.dart';
 
 import '../../../../app/routes/app_routes.dart';
 import '../../../../core/constants/app_strings.dart';
@@ -46,12 +47,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   /// Get a new request_token from TMDB when button clicked
   Future<void> getToken() async {
-    final requestToken = await _controller.getRequestToken();
+    final isSuccess = await _controller.getRequestToken();
 
-    if (requestToken != null) {
-      Get.toNamed(AppRoutes.login, arguments: requestToken);
+    if (isSuccess) {
+      Get.toNamed(AppRoutes.login, arguments: _controller.requestToken);
+    } else {
+      // ignore: use_build_context_synchronously
+      showSnackBar(
+        context: context,
+        text: _controller.errorMessage ?? '',
+        color: Colors.red,
+      );
     }
-
-    // Get.toNamed(AppRoutes.login);
   }
 }

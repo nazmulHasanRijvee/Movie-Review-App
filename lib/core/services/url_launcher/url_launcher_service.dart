@@ -2,7 +2,7 @@ import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../utils/urls.dart';
+import '../../utils/urls.dart';
 
 class UrlLauncherService extends GetxService {
   Future<void> launchAuthUrl(String requestToken) async {
