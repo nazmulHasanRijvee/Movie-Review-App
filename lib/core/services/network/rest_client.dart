@@ -11,7 +11,7 @@ abstract class RestClient {
       _RestClient;
 
   @GET(Endpoints.requestToken)
-  Future<HttpResponse> getRequestToken();
+  Future<dynamic> getRequestToken();
 
   // @POST(Endpoints.register)
   // Future<HttpResponse> register(@Body() Map<String, dynamic> request);
