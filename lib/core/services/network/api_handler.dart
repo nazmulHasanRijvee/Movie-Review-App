@@ -24,8 +24,10 @@ class Api {
     try {
       result = await action;
     } on DioException catch (e, stackTrace) {
+      // 1. DioExceptioin occured and Backend returned a JSON map with 'message'
       final request = e.requestOptions;
       final response = e.response;
+      final data = request.data;
 
       _logger.e(
         'DioException [${e.type}] ${request.method} ${request.uri}\n'
@@ -37,23 +39,22 @@ class Api {
         stackTrace: stackTrace,
       );
 
-      if (response?.data != null) {
-        final data = response!.data;
-
-        if (data is Map<String, dynamic>) {
-          final message = data['status_message'] ?? data['message'];
-          if (message != null) {
-            await onError(message.toString());
-            return;
-          }
+      // Check if the backend returned a JSON map with a 'message' field
+      if (data != null && data is Map<String, dynamic>) {
+        final message = data['status_message'] ?? data['message'];
+        // if "message" is not null, call onError with the message and stop further processing
+        if (message != null) {
+          await onError(message.toString());
+          return;
         }
       }
 
+      // If the backend did not return a 'message', use the DioException's message or a generic error message
       final errorMsg = e.message ?? e.toString();
       await onError(errorMsg);
       return;
     } catch (e, stackTrace) {
-      //Generic fallback for unexpected errors like fromJson failures, TypeErors,
+      // Generic fallback for unexpected errors like fromJson failures, TypeErors,
       // Anything Dio didn't wrap
       _logger.e('Unexpected Exception', error: e, stackTrace: stackTrace);
       await onError(e.toString());
