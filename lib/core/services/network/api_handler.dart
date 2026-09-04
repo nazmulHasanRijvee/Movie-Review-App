@@ -14,10 +14,10 @@ class Api {
     try {
       result = await action;
     } on DioException catch (e, stackTrace) {
-      // 1. DioExceptioin occured and Backend returned a JSON map with 'message'
+      // 1. DioException occured and Backend returned a JSON map with 'message'
       final request = e.requestOptions;
       final response = e.response;
-      final data = request.data;
+      final data = response?.data;
 
       AppLogger.error(
         'DioException [${e.type}] ${request.method} ${request.uri}\n'

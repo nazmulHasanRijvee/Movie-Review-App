@@ -52,7 +52,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     if (isSuccess) {
       Get.toNamed(AppRoutes.login, arguments: _controller.requestToken);
     } else {
-      // ignore: use_build_context_synchronously
+      if (!mounted) return;
       showSnackBar(
         context: context,
         text: _controller.errorMessage ?? '',
