@@ -1,19 +1,9 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
+
+import '../../logger/app_logger.dart';
 
 class Api {
-  static final Logger _logger = Logger(
-    printer: PrettyPrinter(
-      methodCount: 2,
-      errorMethodCount: 8,
-      lineLength: 100,
-      colors: true,
-      printEmojis: true,
-      dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
-    ),
-  );
-
   static Future<void> call<T>({
     required Future<T> action,
     required FutureOr<void> Function(T response) onSuccess,
@@ -29,7 +19,7 @@ class Api {
       final response = e.response;
       final data = request.data;
 
-      _logger.e(
+      AppLogger.error(
         'DioException [${e.type}] ${request.method} ${request.uri}\n'
         'Status Code: ${response?.statusCode}\n'
         'Headers: ${request.headers}\n'
@@ -56,7 +46,7 @@ class Api {
     } catch (e, stackTrace) {
       // Generic fallback for unexpected errors like fromJson failures, TypeErors,
       // Anything Dio didn't wrap
-      _logger.e('Unexpected Exception', error: e, stackTrace: stackTrace);
+      AppLogger.error('Unexpected Exception', error: e, stackTrace: stackTrace);
       await onError(e.toString());
       return;
     }
