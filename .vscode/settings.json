@@ -1,5 +1,5 @@
 {
   "window.zoomLevel": 0,
-  "editor.fontSize": 18,
+  "editor.fontSize": 15,
   "dart.flutterSdkPath": ".fvm/versions/3.44.9",
 }
