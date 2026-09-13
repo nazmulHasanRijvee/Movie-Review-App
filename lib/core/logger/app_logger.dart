@@ -19,15 +19,15 @@ class AppLogger {
     level: kDebugMode ? Level.trace : Level.error,
   );
 
-  static void trace(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+  static void trace(dynamic message, {dynamic error, StackTrace? stackTrace}) {
     _logger.t(message, error: error, stackTrace: stackTrace);
   }
 
-  static void debug(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+  static void debug(dynamic message, {dynamic error, StackTrace? stackTrace}) {
     _logger.d(message, error: error, stackTrace: stackTrace);
   }
 
-  static void info(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+  static void info(dynamic message, {dynamic error, StackTrace? stackTrace}) {
     _logger.i(message, error: error, stackTrace: stackTrace);
   }
 
