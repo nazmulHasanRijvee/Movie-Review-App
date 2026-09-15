@@ -1,20 +1,21 @@
 import 'dart:collection';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:of_28_movie_review_app/features/movie_details/data/model/movie_details_model.dart';
 
-import '../../../../core/services/api_service.dart';
-import '../../../../core/utils/urls.dart';
+import '../../../../core/logger/app_logger.dart';
+import '../../../../core/services/network/api_handler.dart';
+import '../../../../core/services/network/rest_client.dart';
 import '../model/movie_result.dart';
 
 class MovieRepository extends GetxService {
-  final ApiService _apiService = Get.find<ApiService>();
+  // DI
+  RestClient get _restClient => Get.find<RestClient>();
 
   final LinkedHashMap<int, MovieDetailsModel> _cache = LinkedHashMap();
 
   MovieDetailsModel? checkCache(int movieId) {
-    debugPrint('getting from cache id: $movieId');
+    AppLogger.info('getting from cache, id: $movieId');
 
     if (!_cache.containsKey(movieId)) {
       return null;
@@ -36,24 +37,29 @@ class MovieRepository extends GetxService {
   }
 
   Future<MovieResult> getMovieDetails(int movieId) async {
-    final ApiResponse response = await _apiService.getRequest(
-      url: Urls.getMovieById(movieId),
+    MovieResult? movieResult;
+
+    await Api.call<MovieDetailsModel>(
+      action: _restClient.movieById(movieId),
+      onSuccess: (movieDetails) {
+        _cache[movieId] = movieDetails;
+        AppLogger.info('Saving to cache: ${_cache[movieId]}');
+        movieResult = MovieResult(
+          movieDetailsModel: movieDetails,
+          errorMessage: null,
+        );
+      },
+      onError: (error) {
+        AppLogger.error('Error fetching movie details: $error');
+        movieResult = MovieResult(movieDetailsModel: null, errorMessage: error);
+      },
     );
 
-    if (response.isSuccess) {
-      final movieDetails = MovieDetailsModel.fromJson(response.body);
-
-      _cache[movieId] = movieDetails;
-
-      debugPrint('Saving to cache: ${_cache[movieId]}');
-
-      return MovieResult(movieDetailsModel: movieDetails, errorMessage: null);
-    }
-
-    return MovieResult(
-      movieDetailsModel: null,
-      errorMessage:
-          'Status Code: ${response.statusCode} Message: ${response.errorMessage}',
-    );
+    return movieResult ??
+        MovieResult(
+          movieDetailsModel: null,
+          errorMessage:
+              'Failed to fetch movie details throwing from repository',
+        );
   }
 }

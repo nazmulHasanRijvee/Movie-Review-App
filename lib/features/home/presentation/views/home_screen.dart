@@ -23,15 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _fetchMovies();
-  }
-
-  Future<void> _fetchMovies() async {
-    Future.wait([
-      controller.fetchMovies('new'),
-      controller.fetchMovies('upcoming'),
-      controller.fetchMovies('trending'),
-    ]);
+    controller.fetchMovies();
   }
 
   @override

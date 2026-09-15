@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
-import 'package:of_28_movie_review_app/features/shared/data/model/movie_model.dart';
 
-import '../../../../core/services/api_service.dart';
-import '../../../../core/utils/urls.dart';
+import '../../../../core/services/network/api_handler.dart';
+import '../../../../core/services/network/rest_client.dart';
+import '../../../shared/data/model/movie_model.dart';
+import '../../../shared/data/model/movie_response.dart';
 
 class SearchMovieController extends GetxController {
-  final ApiService _apiService = Get.find<ApiService>();
+  RestClient get _restClient => Get.find<RestClient>();
 
   final RxBool isLoading = false.obs;
 
@@ -19,22 +20,36 @@ class SearchMovieController extends GetxController {
     bool isSuccess = false;
     isLoading.value = true;
 
-    final ApiResponse response = await _apiService.getRequest(
-      url: Urls.searchMovieUrl(query),
+    // final ApiResponse response = await _apiService.getRequest(
+    //   url: Urls.searchMovieUrl(query),
+    // );
+
+    // if (response.isSuccess) {
+    //   isSuccess = true;
+    //   _errorMessage = null;
+
+    //   _searchResults = response.body['results']
+    //       .map<MovieModel>((e) => MovieModel.fromJson(e))
+    //       .toList();
+    // } else {
+    //   _errorMessage =
+    //       response.errorMessage ??
+    //       "response.errorMessage is null from controller";
+    //}
+
+    await Api.call<MovieResponse>(
+      action: _restClient.searchMovie(query),
+      onSuccess: (data) {
+        isSuccess = true;
+        _errorMessage = null;
+
+        _searchResults = data.results;
+      },
+      onError: (error) {
+        isSuccess = false;
+        _errorMessage = error;
+      },
     );
-
-    if (response.isSuccess) {
-      isSuccess = true;
-      _errorMessage = null;
-
-      _searchResults = response.body['results']
-          .map<MovieModel>((e) => MovieModel.fromJson(e))
-          .toList();
-    } else {
-      _errorMessage =
-          response.errorMessage ??
-          "response.errorMessage is null from controller";
-    }
 
     isLoading.value = false;
 

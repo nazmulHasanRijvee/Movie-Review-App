@@ -24,12 +24,11 @@ class Endpoints {
   static String fetchAccountDetails(String? accountId) =>
       '$baseUrl/account/$accountId';
 
-  static String get trendingUrl => '$baseUrl/trending/all/week';
-  static String get newlyReleased => '$baseUrl/movie/now_playing';
-  static String get upcomingMovies => '$baseUrl/movie/upcoming';
+  static const String trendingUrl = '/trending/all/week';
+  static const String newlyReleased = '/movie/now_playing';
+  static const String upcomingMovies = '/movie/upcoming';
 
-  static String getMovieById(int id) => '$baseUrl/movie/$id';
+  static const String movieById = '/movie/{id}';
 
-  static String searchMovieUrl(String query) =>
-      '$baseUrl/search/movie?query=$query';
+  static const String searchMovieUrl = '/search/movie';
 }

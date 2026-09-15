@@ -51,7 +51,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Obx(() {
-          if (controller.isLoading.value) {
+          if (controller.isLoading) {
             return Column(
               children: [
                 const SizedBox(height: 330),

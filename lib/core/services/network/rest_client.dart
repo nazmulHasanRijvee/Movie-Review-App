@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:of_28_movie_review_app/features/shared/data/model/movie_response.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../../../features/movie_details/data/model/movie_details_model.dart';
 import 'endpoints.dart';
 
 part 'rest_client.g.dart';
@@ -13,12 +15,19 @@ abstract class RestClient {
   @GET(Endpoints.requestToken)
   Future<dynamic> getRequestToken();
 
-  // @POST(Endpoints.register)
-  // Future<HttpResponse> register(@Body() Map<String, dynamic> request);
+  @GET(Endpoints.trendingUrl)
+  Future<MovieResponse> trending();
 
-  // @POST(Endpoints.login)
-  // Future<HttpResponse> login(@Body() Map<String, dynamic> request);
+  @GET(Endpoints.newlyReleased)
+  Future<MovieResponse> newlyReleased();
 
-  // @POST(Endpoints.forgotPassword)
-  // Future<HttpResponse> forgotPassword(@Body() Map<String, dynamic> request);
+  @GET(Endpoints.upcomingMovies)
+  Future<MovieResponse> upcoming();
+
+  @GET(Endpoints.movieById)
+  Future<MovieDetailsModel> movieById(@Path("id") int id);
+
+  @GET(Endpoints.searchMovieUrl)
+  Future<MovieResponse> searchMovie(@Query("query") String query);
+
 }
