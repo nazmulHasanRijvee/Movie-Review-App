@@ -1,6 +1,8 @@
 class Endpoints {
   static const baseUrl = String.fromEnvironment("BASE_URL");
-  // static const communityBase = String.fromEnvironment("COMMUNITY_URL");
+
+  /// Alias used by TokenManager so the call-site is self-documenting.
+  static const String base = baseUrl;
 
   static const String apiKey = String.fromEnvironment(
     "API_KEY",
@@ -12,6 +14,9 @@ class Endpoints {
   static const String requestToken = '/authentication/token/new';
   static const String oAuthLink = 'https://www.themoviedb.org/authenticate';
   static const String getSessionId = '/authentication/session/new';
+
+  /// Token refresh endpoint – update once your backend is ready.
+  static const String refreshToken = '/authentication/token/refresh';
 
   // log out and delete session id
   static const String deleteSessionId = '/authentication/session';

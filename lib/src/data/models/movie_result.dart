@@ -1,4 +1,4 @@
-import 'package:of_28_movie_review_app/src/data/models/movie_details_model.dart';
+import 'package:cinephiler/src/data/models/movie_details_model.dart';
 
 class MovieResult {
   final MovieDetailsModel? movieDetailsModel;

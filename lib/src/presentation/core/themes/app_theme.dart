@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:of_28_movie_review_app/src/core/constants/app_colors.dart';
+import 'package:cinephiler/src/core/constants/app_colors.dart';
 
 class AppTheme {
   const AppTheme._();

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:of_28_movie_review_app/src/data/models/movie_response.dart';
+import 'package:cinephiler/src/data/models/movie_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../models/movie_details_model.dart';

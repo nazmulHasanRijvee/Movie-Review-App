@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:of_28_movie_review_app/src/presentation/features/auth/onboarding/widgets/onboarding_elevated_button.dart';
-import 'package:of_28_movie_review_app/src/presentation/features/auth/onboarding/widgets/onboarding_stack.dart';
-import 'package:of_28_movie_review_app/src/presentation/core/widgets/show_snackbar.dart';
+import 'package:cinephiler/src/presentation/features/auth/onboarding/widgets/onboarding_elevated_button.dart';
+import 'package:cinephiler/src/presentation/features/auth/onboarding/widgets/onboarding_stack.dart';
+import 'package:cinephiler/src/presentation/core/widgets/show_snackbar.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../../core/constants/app_strings.dart';

@@ -1,5 +1,5 @@
-name: of_28_movie_review_app
-description: "A new Flutter project."
+name: cinephiler
+description: "A Flutter project of a movie review app"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -39,7 +39,9 @@ dependencies:
   flutter_dotenv: ^6.0.1
   app_links: ^7.2.1
   url_launcher: ^6.3.2
+  # Storage and cache
   shared_preferences: ^2.5.5
+  flutter_secure_storage: ^11.2.0
   # Network
   dio: ^5.9.2
   retrofit: ^4.9.2
@@ -47,8 +49,10 @@ dependencies:
   json_annotation: ^4.11.0
 
   cupertino_ui: any
+  # Logging
   pretty_dio_logger: ^1.4.0
   logger: ^2.7.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

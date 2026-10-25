@@ -1,18 +1,22 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
+import 'package:get/get.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../auth/auth_service.dart';
+import 'auth/token_manager.dart';
 import 'endpoints.dart';
 import 'interceptors/access_token_interceptor.dart';
 import 'interceptors/token_refresh_interceptor.dart';
 
 class DioClient extends GetxService {
-  static Dio getInstance() {
+  /// Creates a fully-wired [Dio] instance.
+  ///
+  /// Pass [tokenManager] explicitly so that [AppBindings] controls the wiring
+  /// order. Interceptors are added in priority order:
+  ///   1. [AccessTokenInterceptor]  – attaches Bearer token on every request.
+  ///   2. [TokenRefreshInterceptor] – retries once after a silent refresh on 401.
+  ///   3. [PrettyDioLogger]         – always last so it logs the final request.
+  static Dio getInstance({required TokenManager tokenManager}) {
     final dio = Dio(
       BaseOptions(
         baseUrl: Endpoints.baseUrl,
@@ -25,21 +29,10 @@ class DioClient extends GetxService {
       ),
     );
 
-    final authService = Get.find<AuthService>();
-
     dio.interceptors.addAll([
-      AccessTokenInterceptor(
-        // onRequest: attach token
-        authService: authService,
-      ),
+      AccessTokenInterceptor(tokenManager: tokenManager),
       TokenRefreshInterceptor(
-        // onError: refresh token
-        baseUrl: Endpoints.baseUrl,
-        refreshTokenEndpoint:
-            Endpoints.baseUrl, // add your refresh token endpoint here
-        authService: authService,
-        navigatorKey:
-            GlobalKey<NavigatorState>(), // Use the global navigator key
+        tokenManager: tokenManager,
         dio: dio,
       ),
       PrettyDioLogger(
@@ -50,10 +43,11 @@ class DioClient extends GetxService {
         error: true,
         compact: true,
         maxWidth: 90,
-        enabled: kDebugMode, // Enable logging only in debug mode
-      ), // always last
+        enabled: kDebugMode,
+      ),
     ]);
 
     return dio;
   }
 }
+

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:of_28_movie_review_app/src/presentation/core/app_bindings/app_bindings.dart';
-import 'package:of_28_movie_review_app/src/presentation/core/themes/app_theme.dart';
 
+
+import 'src/presentation/core/app_bindings/app_bindings.dart';
 import 'src/presentation/core/routes/app_pages.dart';
 import 'src/presentation/core/routes/app_routes.dart';
+import 'src/presentation/core/themes/app_theme.dart';
 
 class MovieApp extends StatelessWidget {
   const MovieApp({super.key});

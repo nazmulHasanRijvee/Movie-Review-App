@@ -1,4 +1,4 @@
-import 'package:of_28_movie_review_app/src/domain/entities/movie.dart';
+import 'package:cinephiler/src/domain/entities/movie.dart';
 
 class MovieModel extends Movie {
   MovieModel({

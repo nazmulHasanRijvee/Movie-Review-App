@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:of_28_movie_review_app/src/presentation/core/routes/app_routes.dart';
-import 'package:of_28_movie_review_app/src/data/models/movie_model.dart';
-import 'package:of_28_movie_review_app/src/data/services/auth_controller.dart';
-import 'package:of_28_movie_review_app/src/core/constants/app_colors.dart';
-import 'package:of_28_movie_review_app/src/core/utils/asset_paths.dart';
-import 'package:of_28_movie_review_app/src/data/models/user_model.dart';
-import 'package:of_28_movie_review_app/src/presentation/features/home/controllers/home_controller.dart';
-import 'package:of_28_movie_review_app/src/presentation/features/home/widgets/movie_card.dart';
+import 'package:cinephiler/src/presentation/core/routes/app_routes.dart';
+import 'package:cinephiler/src/data/models/movie_model.dart';
+import 'package:cinephiler/src/data/services/auth_controller.dart';
+import 'package:cinephiler/src/core/constants/app_colors.dart';
+import 'package:cinephiler/src/core/utils/asset_paths.dart';
+import 'package:cinephiler/src/data/models/user_model.dart';
+import 'package:cinephiler/src/presentation/features/home/controllers/home_controller.dart';
+import 'package:cinephiler/src/presentation/features/home/widgets/movie_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

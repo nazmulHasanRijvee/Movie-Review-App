@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:of_28_movie_review_app/src/data/services/auth_controller.dart';
+import 'package:cinephiler/src/data/services/auth_controller.dart';
 
 import '../../../core/routes/app_routes.dart';
 import '../../../../core/constants/app_colors.dart';

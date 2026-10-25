@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:of_28_movie_review_app/src/data/services/auth_controller.dart';
-import 'package:of_28_movie_review_app/src/data/services/network/rest_client.dart';
-import 'package:of_28_movie_review_app/src/data/models/movie_model.dart';
-import 'package:of_28_movie_review_app/src/data/services/api_service.dart';
-import 'package:of_28_movie_review_app/src/core/utils/urls.dart';
-import 'package:of_28_movie_review_app/src/data/models/movie_response.dart';
+import 'package:cinephiler/src/data/services/auth_controller.dart';
+import 'package:cinephiler/src/data/services/network/rest_client.dart';
+import 'package:cinephiler/src/data/models/movie_model.dart';
+import 'package:cinephiler/src/data/services/api_service.dart';
+import 'package:cinephiler/src/core/utils/urls.dart';
+import 'package:cinephiler/src/data/models/movie_response.dart';
 
 import '../../../../data/services/network/api_handler.dart';
 

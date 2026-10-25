@@ -1,24 +1,23 @@
 import 'package:dio/dio.dart';
-import 'package:of_28_movie_review_app/src/data/services/network/endpoints.dart';
 
-import '../../auth/auth_service.dart';
+import '../auth/token_manager.dart';
 
-/// Job: attach the current access token to every outgoing request.
-/// Nothing else. No refresh logic, no queue, no navigation.
+/// Attaches the current Bearer access token to every outgoing request.
+/// Nothing else, no refresh logic, no queue, no navigation.
 class AccessTokenInterceptor extends Interceptor {
-  AccessTokenInterceptor({required this.authService});
+  AccessTokenInterceptor({required this.tokenManager});
 
-  final AuthService authService;
+  final TokenManager tokenManager;
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers["Authorization"] = Endpoints.apiBearer;
-    // final accessToken = getAccessToken;
-    // if (accessToken != null) {
-    //   //options.headers['Authorization'] = 'Bearer $accessToken';
-    // }
+  Future<void> onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    final token = await tokenManager.accessToken;
+    if (token != null && token.isNotEmpty) {
+      options.headers['Authorization'] = 'Bearer $token';
+    }
     handler.next(options);
   }
-
-  String? get getAccessToken => authService.accessToken;
 }

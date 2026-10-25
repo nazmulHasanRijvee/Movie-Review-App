@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:of_28_movie_review_app/src/data/services/api_service.dart';
-import 'package:of_28_movie_review_app/src/data/services/deep_links/deep_link_services.dart';
-import 'package:of_28_movie_review_app/src/data/services/url_launcher/url_launcher_service.dart';
+import 'package:cinephiler/src/data/services/api_service.dart';
+import 'package:cinephiler/src/data/services/deep_links/deep_link_services.dart';
+import 'package:cinephiler/src/data/services/url_launcher/url_launcher_service.dart';
 
 import '../../../../../data/services/auth_controller.dart';
 import '../../../../../core/utils/urls.dart';

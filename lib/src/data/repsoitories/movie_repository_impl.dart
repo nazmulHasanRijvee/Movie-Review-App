@@ -1,8 +1,8 @@
 import 'dart:collection';
 
 import 'package:get/get.dart';
-import 'package:of_28_movie_review_app/src/data/models/movie_details_model.dart';
-import 'package:of_28_movie_review_app/src/domain/repositories/movie_repository.dart';
+import 'package:cinephiler/src/data/models/movie_details_model.dart';
+import 'package:cinephiler/src/domain/repositories/movie_repository.dart';
 
 import '../../core/logger/app_logger.dart';
 import '../services/network/api_handler.dart';

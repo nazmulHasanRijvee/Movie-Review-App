@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:of_28_movie_review_app/src/data/models/movie_model.dart';
+import 'package:cinephiler/src/data/models/movie_model.dart';
 
 import '../../../../core/utils/urls.dart';
 

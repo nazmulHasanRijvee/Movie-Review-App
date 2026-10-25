@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:of_28_movie_review_app/src/data/models/movie_details_model.dart';
-import 'package:of_28_movie_review_app/src/data/models/movie_model.dart';
+import 'package:cinephiler/src/data/models/movie_details_model.dart';
+import 'package:cinephiler/src/data/models/movie_model.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/urls.dart';

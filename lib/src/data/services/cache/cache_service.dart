@@ -23,12 +23,3 @@ abstract interface class CacheService {
 
   Future<void> clear();
 }
-
-// final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
-//   throw UnimplementedError('Initialize this in main');
-// });
-
-// final cacheServiceProvider = Provider<CacheService>((ref) {
-//   final prefs = ref.watch(sharedPreferencesProvider);
-//   return SharedPreferencesService(prefs);
-// });
