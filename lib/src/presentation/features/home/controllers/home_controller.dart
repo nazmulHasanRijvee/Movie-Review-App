@@ -1,5 +1,6 @@
+import 'package:cinephiler/src/data/repsoitories/auth_repository_impl.dart';
+import 'package:cinephiler/src/data/services/network/auth/token_manager.dart';
 import 'package:get/get.dart';
-import 'package:cinephiler/src/data/services/auth_controller.dart';
 import 'package:cinephiler/src/data/services/network/rest_client.dart';
 import 'package:cinephiler/src/data/models/movie_model.dart';
 import 'package:cinephiler/src/data/services/api_service.dart';
@@ -11,7 +12,8 @@ import '../../../../data/services/network/api_handler.dart';
 class HomeController extends GetxController {
   // DI
   ApiService get _apiService => Get.find<ApiService>();
-  AuthController get _authController => Get.find<AuthController>();
+  AuthRepositoryImpl get _authRepo => Get.find<AuthRepositoryImpl>();
+  TokenManager get _tokenManager => Get.find<TokenManager>();
   RestClient get _restClient => Get.find<RestClient>();
 
   List<MovieModel> _trendingMovies = [];
@@ -102,7 +104,7 @@ class HomeController extends GetxController {
   Future<bool> logOut() async {
     bool isSuccess = false;
 
-    final sessionId = _authController.accessSessionId;
+    final sessionId = await _tokenManager.accessToken;
 
     if (sessionId == null) return false;
 
@@ -113,7 +115,8 @@ class HomeController extends GetxController {
 
     if (apiResponse.isSuccess) {
       isSuccess = true;
-      await _authController.clearUserData();
+      await _authRepo.clearUserData();
+      await _tokenManager.clearSession(notifyExpired: false);
     } else {
       _errorMessage =
           apiResponse.errorMessage ?? 'Showing error from controller';

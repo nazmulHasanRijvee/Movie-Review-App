@@ -1,8 +1,8 @@
+import 'package:cinephiler/src/data/repsoitories/auth_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cinephiler/src/presentation/core/routes/app_routes.dart';
 import 'package:cinephiler/src/data/models/movie_model.dart';
-import 'package:cinephiler/src/data/services/auth_controller.dart';
 import 'package:cinephiler/src/core/constants/app_colors.dart';
 import 'package:cinephiler/src/core/utils/asset_paths.dart';
 import 'package:cinephiler/src/data/models/user_model.dart';
@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final controller = Get.find<HomeController>();
-  final UserModel? user = Get.find<AuthController>().userModel;
+  UserModel? get user => Get.find<AuthRepositoryImpl>().user;
 
   @override
   void initState() {

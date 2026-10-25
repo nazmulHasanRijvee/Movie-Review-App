@@ -18,6 +18,7 @@ class TokenManager extends GetxService {
     required TokenStore store,
     required String refreshBaseUrl,
     required String refreshEndpoint,
+    this.onSessionExpired
   }) : _refreshDio = Dio(
           BaseOptions(
            baseUrl: refreshBaseUrl,
@@ -25,27 +26,21 @@ class TokenManager extends GetxService {
            receiveTimeout: const Duration(seconds: 15),
           ),
         ),
-
        _store = store,
-
-       _refreshEndpoint = refreshEndpoint
-       
-       {
+       _refreshEndpoint = refreshEndpoint     
+  {
     _ready = _loadTokens();
   }
 
   final TokenStore _store;
   final String _refreshEndpoint;
+  final FutureOr<void> Function()? onSessionExpired;
   final Dio _refreshDio;
-  final StreamController<bool> _sessionController =
-      StreamController<bool>.broadcast();
   late final Future<void> _ready;
   String? _accessToken;
   String? _refreshToken;
   Completer<String>? _inflightRefresh;
   int _sessionEpoch = 0;
-
-  Stream<bool> get sessionStream => _sessionController.stream.distinct();
 
 
   Future<String?> get accessToken async {
@@ -58,7 +53,10 @@ class TokenManager extends GetxService {
     return _refreshToken;
   }
 
-  bool get hasSession => _refreshToken != null;
+  Future<bool> get hasSession async {
+    await _ready;
+    return _accessToken != null || _refreshToken != null;
+  }
 
   Future<void> saveTokens({required String access, String? refresh}) async {
     await _ready;
@@ -69,25 +67,27 @@ class TokenManager extends GetxService {
 
     _accessToken = access;
     if (refresh != null && refresh.isNotEmpty) _refreshToken = refresh;
-
-    _sessionController.add(true);
   }
 
 
-  Future<void> clearSession() async {
+  Future<void> clearSession({bool notifyExpired = false}) async {
     _sessionEpoch++; // Immediately invalidates any in-flight refresh
+
     await _ready;
     await _store.clear();
+
     _accessToken = null;
     _refreshToken = null;
-    _sessionController.add(false);
+
+    if (notifyExpired) {
+      await onSessionExpired?.call();
+    }
   }
 
-  /// Closes the session broadcast controller and _refreshDio's socket pool.
+  /// Closes the _refreshDio's socket pool.
   @override
   void onClose() {
     _refreshDio.close();
-    _sessionController.close();
   }
 
   /// Refreshes the access token. Concurrent callers share one HTTP roundtrip.
@@ -110,7 +110,7 @@ class TokenManager extends GetxService {
       completer.complete(newAccess);
 
     } catch (e, stackTrace) {
-      if (_isAuthDefinitive(e)) await clearSession();
+      if (_isAuthDefinitive(e)) await clearSession(notifyExpired: true);
 
       completer.completeError(e, stackTrace);
     } finally {

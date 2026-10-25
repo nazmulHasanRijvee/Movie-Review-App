@@ -1,6 +1,6 @@
+import 'package:cinephiler/src/data/services/network/auth/token_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cinephiler/src/data/services/auth_controller.dart';
 
 import '../../../core/routes/app_routes.dart';
 import '../../../../core/constants/app_colors.dart';
@@ -39,12 +39,12 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _moveTo() async {
-    final isLoggedIn = await Get.find<AuthController>().isUserLoggedIn();
+    final isLoggedIn = await Get.find<TokenManager>().hasSession;
 
     if (isLoggedIn) {
       Get.offNamed(AppRoutes.home);
     } else {
-      Get.offNamed(AppRoutes.home);
+      Get.offNamed(AppRoutes.onboarding);
     }
   }
 

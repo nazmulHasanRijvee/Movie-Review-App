@@ -1,12 +1,13 @@
 import 'dart:async';
 
+import 'package:cinephiler/src/data/repsoitories/auth_repository_impl.dart';
+import 'package:cinephiler/src/data/services/network/auth/token_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cinephiler/src/data/services/api_service.dart';
 import 'package:cinephiler/src/data/services/deep_links/deep_link_services.dart';
 import 'package:cinephiler/src/data/services/url_launcher/url_launcher_service.dart';
 
-import '../../../../../data/services/auth_controller.dart';
 import '../../../../../core/utils/urls.dart';
 import '../../../../../data/models/user_model.dart';
 
@@ -34,7 +35,8 @@ class LoginController extends GetxController {
   UrlLauncherService get _urlLauncherService => Get.find<UrlLauncherService>();
   DeepLinkServices get _deepLinkServices => Get.find<DeepLinkServices>();
   ApiService get _apiService => Get.find<ApiService>();
-  AuthController get _authController => Get.find<AuthController>();
+  AuthRepositoryImpl get _authRepo => Get.find<AuthRepositoryImpl>();
+  TokenManager get _tokenManager => Get.find<TokenManager>();
 
   // getter methods to ensure encapsulation
   bool get isLoading => _isLoading.value;
@@ -198,7 +200,8 @@ class LoginController extends GetxController {
 
     // Save session id and user details in the AuthController
     final UserModel user = UserModel.fromJson(apiResponse.body);
-    await _authController.saveUserData(user, sessionId);
+    await _authRepo.saveUserData(user);
+    await _tokenManager.saveTokens(access: sessionId);
   }
 
   @override
