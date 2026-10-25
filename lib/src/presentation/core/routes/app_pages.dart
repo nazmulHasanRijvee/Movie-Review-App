@@ -11,6 +11,7 @@ import '../../features/movie_details/views/movie_details_screen.dart';
 import '../../features/search_movie/bindings/search_bindings.dart';
 import '../../features/search_movie/views/search_screen.dart';
 import '../../features/splash/views/splash_screen.dart';
+import '../middlewares/auth_middleware.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -30,16 +31,19 @@ class AppPages {
       name: AppRoutes.home,
       page: () => const HomeScreen(),
       binding: HomeBindings(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.movieDetails,
       page: () => const MovieDetailsScreen(),
       binding: MovieDetailsBindings(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.searchMovie,
       page: () => const SearchScreen(),
       binding: SearchBindings(),
+      middlewares: [AuthMiddleware()],
     ),
   ];
 }

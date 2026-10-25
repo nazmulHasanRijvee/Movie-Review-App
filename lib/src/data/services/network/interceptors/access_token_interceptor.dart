@@ -1,3 +1,4 @@
+import 'package:cinephiler/src/data/services/network/endpoints.dart';
 import 'package:dio/dio.dart';
 
 import '../auth/token_manager.dart';
@@ -15,8 +16,9 @@ class AccessTokenInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     final token = await tokenManager.accessToken;
+    final apiKey = Endpoints.apiKey;
     if (token != null && token.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $token';
+      options.headers['Authorization'] = 'Bearer $apiKey';
     }
     handler.next(options);
   }

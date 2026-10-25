@@ -55,8 +55,12 @@ class TokenManager extends GetxService {
 
   Future<bool> get hasSession async {
     await _ready;
-    return _accessToken != null || _refreshToken != null;
+    return _accessToken != null;
   }
+
+  /// Synchronous in-memory check (true if an access or refresh token is loaded).
+  /// Safe to use in [GetMiddleware.redirect] after initial app initialization.
+  bool get hasSessionSync => _accessToken != null || _refreshToken != null;
 
   Future<void> saveTokens({required String access, String? refresh}) async {
     await _ready;

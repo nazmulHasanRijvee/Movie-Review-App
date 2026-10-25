@@ -8,7 +8,6 @@ class Endpoints {
     "API_KEY",
     defaultValue: '',
   );
-  static const String apiBearer = "Bearer $apiKey";
 
   // Authentication
   static const String requestToken = '/authentication/token/new';
