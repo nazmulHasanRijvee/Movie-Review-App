@@ -5,8 +5,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'app/movie_app.dart';
-import 'core/logger/app_logger.dart';
+import 'movie_app.dart';
+import 'src/core/logger/app_logger.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
