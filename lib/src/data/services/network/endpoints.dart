@@ -12,7 +12,7 @@ class Endpoints {
   // Authentication
   static const String requestToken = '/authentication/token/new';
   static const String oAuthLink = 'https://www.themoviedb.org/authenticate';
-  static const String getSessionId = '/authentication/session/new';
+  static const String login = '/authentication/session/new';
 
   /// Token refresh endpoint – update once your backend is ready.
   static const String refreshToken = '/authentication/token/refresh';
@@ -21,8 +21,7 @@ class Endpoints {
   static const String deleteSessionId = '/authentication/session';
 
   // User Details
-  static String getUserDetails(String sessionId) =>
-      '$baseUrl/account/null?session_id=$sessionId';
+  static const String userDetails = '/account/null'; // ?session_id=$sessionId
 
   // Fetch an account detail using the account_id
   static String fetchAccountDetails(String? accountId) =>

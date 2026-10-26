@@ -1,4 +1,4 @@
-import 'package:cinephiler/src/data/repsoitories/auth_repository_impl.dart';
+import 'package:cinephiler/src/data/repositories/auth_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cinephiler/src/presentation/core/routes/app_routes.dart';
@@ -63,9 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           IconButton(
             onPressed: () async {
-              final isSuccess = await controller.logOut();
-              if (!isSuccess) return;
-              Get.offAllNamed(AppRoutes.onboarding);
+              await controller.logOut();
             },
             icon: Icon(Icons.exit_to_app_rounded, color: Colors.white),
           ),
@@ -73,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       body: Obx(() {
-        if (controller.isLoading.value) {
+        if (controller.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
 

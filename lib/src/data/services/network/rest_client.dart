@@ -1,3 +1,4 @@
+import 'package:cinephiler/src/data/models/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:cinephiler/src/data/models/movie_response.dart';
 import 'package:retrofit/retrofit.dart';
@@ -15,6 +16,17 @@ abstract class RestClient {
   // Authentication
   @GET(Endpoints.requestToken)
   Future<dynamic> getRequestToken();
+
+  @POST(Endpoints.login)
+  Future<dynamic> login({@Body() required Map<String, dynamic> request});
+
+  // Logout
+  @DELETE(Endpoints.deleteSessionId)
+  Future<dynamic> deleteSession(@Body() Map<String, dynamic> body);
+
+  // Account
+  @GET(Endpoints.userDetails)
+  Future<UserModel> fetchUser(@Query("session_id") String sessionId);
 
   // Movies
   @GET(Endpoints.trendingUrl)

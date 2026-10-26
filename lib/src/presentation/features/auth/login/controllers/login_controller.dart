@@ -1,15 +1,11 @@
 import 'dart:async';
 
-import 'package:cinephiler/src/data/repsoitories/auth_repository_impl.dart';
-import 'package:cinephiler/src/data/services/network/auth/token_manager.dart';
+import 'package:cinephiler/src/data/repositories/auth_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cinephiler/src/data/services/api_service.dart';
 import 'package:cinephiler/src/data/services/deep_links/deep_link_services.dart';
 import 'package:cinephiler/src/data/services/url_launcher/url_launcher_service.dart';
 
-import '../../../../../core/utils/urls.dart';
-import '../../../../../data/models/user_model.dart';
 
 class LoginController extends GetxController {
   // For showing loading state when OAuth is in progress
@@ -34,9 +30,7 @@ class LoginController extends GetxController {
   // Dependency Injection
   UrlLauncherService get _urlLauncherService => Get.find<UrlLauncherService>();
   DeepLinkServices get _deepLinkServices => Get.find<DeepLinkServices>();
-  ApiService get _apiService => Get.find<ApiService>();
   AuthRepositoryImpl get _authRepo => Get.find<AuthRepositoryImpl>();
-  TokenManager get _tokenManager => Get.find<TokenManager>();
 
   // getter methods to ensure encapsulation
   bool get isLoading => _isLoading.value;
@@ -99,19 +93,11 @@ class LoginController extends GetxController {
       return;
     }
 
-    final response = await _apiService.postRequest(
-      url: Urls.getSessionId,
-      body: {"request_token": requestToken.trim()},
-    );
-
-    if (response.isSuccess) {
-      await getUserData(response.body['session_id']);
-      debugPrint('Session ID: ${response.body['session_id']}');
-    }
+    final isSuccess = await _authRepo.login(requestToken);
 
     await _stopAuth();
 
-    _completeAuth(response.isSuccess);
+    _completeAuth(isSuccess);
   }
 
   void _startLifecycleListener() {
@@ -185,23 +171,6 @@ class LoginController extends GetxController {
     if (!(_authCompleter?.isCompleted ?? true)) {
       _authCompleter?.complete(success);
     }
-  }
-
-  Future<void> getUserData(String sessionId) async {
-    // Get user details
-    final apiResponse = await _apiService.getRequest(
-      url: Urls.getUserDetails(sessionId),
-    );
-
-    if (!apiResponse.isSuccess) {
-      debugPrint('Error getting user details, ${apiResponse.statusCode}');
-      return;
-    }
-
-    // Save session id and user details in the AuthController
-    final UserModel user = UserModel.fromJson(apiResponse.body);
-    await _authRepo.saveUserData(user);
-    await _tokenManager.saveTokens(access: sessionId);
   }
 
   @override

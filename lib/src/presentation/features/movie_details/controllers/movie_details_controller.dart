@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:cinephiler/src/data/models/movie_details_model.dart';
-import 'package:cinephiler/src/data/repsoitories/movie_repository_impl.dart';
+import 'package:cinephiler/src/data/repositories/movie_repository_impl.dart';
 
 import '../../../../core/logger/app_logger.dart';
 import '../../../../data/models/movie_result.dart';

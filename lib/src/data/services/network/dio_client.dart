@@ -30,7 +30,7 @@ class DioClient extends GetxService {
     );
 
     dio.interceptors.addAll([
-      AccessTokenInterceptor(tokenManager: tokenManager),
+      AccessTokenInterceptor(),
       TokenRefreshInterceptor(
         tokenManager: tokenManager,
         dio: dio,

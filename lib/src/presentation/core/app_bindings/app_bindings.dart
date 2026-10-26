@@ -1,11 +1,9 @@
-import 'package:cinephiler/src/data/repsoitories/auth_repository_impl.dart';
+import 'package:cinephiler/src/data/repositories/auth_repository_impl.dart';
 import 'package:cinephiler/src/presentation/core/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../core/constants/app_strings.dart';
-import '../../../data/repsoitories/movie_repository_impl.dart';
-import '../../../data/services/api_service.dart';
+import '../../../data/repositories/movie_repository_impl.dart';
 import '../../../data/services/cache/cache_service.dart';
 import '../../../data/services/network/auth/secure_token.dart';
 import '../../../data/services/network/auth/token_manager.dart';
@@ -25,14 +23,6 @@ class AppBindings implements Bindings {
       permanent: true,
     );
 
-    // 
-    Get.put<AuthRepositoryImpl>(
-      AuthRepositoryImpl(
-        cacheService: Get.find<CacheService>(),
-      ),
-      permanent: true,
-    );
-
     // Secure token storage & TokenManager
     Get.put<TokenStore>(
       SecureTokenStore(),
@@ -46,12 +36,12 @@ class AppBindings implements Bindings {
         refreshEndpoint: Endpoints.refreshToken,
         onSessionExpired: () async {
           await Get.find<AuthRepositoryImpl>().clearUserData();
-          
+
           if (Get.currentRoute != AppRoutes.onboarding) {
             Get.offAllNamed(AppRoutes.onboarding);
             Get.snackbar('Session Expired', 'Please sign in again.');
           }
-        }
+        },
       ),
       permanent: true,
     );
@@ -61,18 +51,16 @@ class AppBindings implements Bindings {
     final dio = DioClient.getInstance(tokenManager: tokenManager);
     Get.put<RestClient>(RestClient(dio), permanent: true);
 
-    Get.put<ApiService>(
-      ApiService(
-        headers: () => {
-          'Authorization': AppStrings.authorizationToken,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        // On 401: clear session, remove cached user, and redirect to onboarding with alert.
-        onUnauthorized: () => tokenManager.clearSession(notifyExpired: true),
+    // 
+    Get.put<AuthRepositoryImpl>(
+      AuthRepositoryImpl(
+        cacheService: Get.find<CacheService>(),
+        restClient: Get.find<RestClient>(),
+        tokenManager: Get.find<TokenManager>()
       ),
       permanent: true,
     );
+
 
     // Repositories
     Get.put<MovieRepositoryImpl>(MovieRepositoryImpl(), permanent: true);

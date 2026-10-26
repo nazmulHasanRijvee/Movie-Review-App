@@ -18,7 +18,7 @@ class TokenManager extends GetxService {
     required TokenStore store,
     required String refreshBaseUrl,
     required String refreshEndpoint,
-    this.onSessionExpired
+    this.onSessionExpired,
   }) : _refreshDio = Dio(
           BaseOptions(
            baseUrl: refreshBaseUrl,

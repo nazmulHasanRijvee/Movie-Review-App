@@ -1,19 +1,15 @@
-import 'package:cinephiler/src/data/repsoitories/auth_repository_impl.dart';
-import 'package:cinephiler/src/data/services/network/auth/token_manager.dart';
+import 'package:cinephiler/src/data/repositories/auth_repository_impl.dart';
 import 'package:get/get.dart';
 import 'package:cinephiler/src/data/services/network/rest_client.dart';
+import 'package:cinephiler/src/presentation/core/routes/app_routes.dart';
 import 'package:cinephiler/src/data/models/movie_model.dart';
-import 'package:cinephiler/src/data/services/api_service.dart';
-import 'package:cinephiler/src/core/utils/urls.dart';
 import 'package:cinephiler/src/data/models/movie_response.dart';
 
 import '../../../../data/services/network/api_handler.dart';
 
 class HomeController extends GetxController {
   // DI
-  ApiService get _apiService => Get.find<ApiService>();
   AuthRepositoryImpl get _authRepo => Get.find<AuthRepositoryImpl>();
-  TokenManager get _tokenManager => Get.find<TokenManager>();
   RestClient get _restClient => Get.find<RestClient>();
 
   List<MovieModel> _trendingMovies = [];
@@ -25,7 +21,7 @@ class HomeController extends GetxController {
   List<MovieModel> get trendingMovies => _trendingMovies;
   List<MovieModel> get newlyReleased => _newlyReleased;
   List<MovieModel> get upcoming => _upcoming;
-  RxBool get isLoading => _isLoading;
+  bool get isLoading => _isLoading.value;
   String? get errorMessage => _errorMessage;
 
   Future<bool> fetchMovies() async {
@@ -101,27 +97,11 @@ class HomeController extends GetxController {
     return isSuccess;
   }
 
-  Future<bool> logOut() async {
-    bool isSuccess = false;
+  Future<void> logOut() async {
+    final isSuccess = await _authRepo.logOut();
 
-    final sessionId = await _tokenManager.accessToken;
-
-    if (sessionId == null) return false;
-
-    final ApiResponse apiResponse = await _apiService.deleteRequest(
-      url: Urls.deleteSessionId,
-      body: {'session_id': sessionId},
-    );
-
-    if (apiResponse.isSuccess) {
-      isSuccess = true;
-      await _authRepo.clearUserData();
-      await _tokenManager.clearSession(notifyExpired: false);
-    } else {
-      _errorMessage =
-          apiResponse.errorMessage ?? 'Showing error from controller';
+    if (isSuccess) {
+      Get.offAllNamed(AppRoutes.onboarding);
     }
-
-    return isSuccess;
   }
 }
