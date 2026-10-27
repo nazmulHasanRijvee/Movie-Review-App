@@ -1,15 +1,14 @@
 import 'dart:convert';
 
-import 'package:cinephiler/src/core/logger/app_logger.dart';
-import 'package:cinephiler/src/data/services/cache/cache_service.dart';
-import 'package:cinephiler/src/data/services/network/api_handler.dart';
-import 'package:cinephiler/src/data/services/network/auth/token_manager.dart';
-import 'package:cinephiler/src/data/services/network/rest_client.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:get/get.dart';
 
-
+import '../../core/logger/app_logger.dart';
 import '../models/user_model.dart';
+import '../services/cache/cache_service.dart';
+import '../services/network/api_handler.dart';
+import '../services/network/auth/token_manager.dart';
+import '../services/network/rest_client.dart';
 
 class AuthRepositoryImpl extends GetxService {
 
@@ -38,7 +37,7 @@ class AuthRepositoryImpl extends GetxService {
       ),
 
       onSuccess: (data) async {
-        debugPrint(data["session_id"]);
+        AppLogger.info("${data["session_id"]}");
 
         isSuccess = await fetchUserData(data["session_id"]);
       },
@@ -90,7 +89,7 @@ class AuthRepositoryImpl extends GetxService {
         },
 
         onError: (msg) {
-          AppLogger.error("Failed to delete remote session (best-effort): $msg");
+          AppLogger.error("Failed to delete remote session: $msg");
         },
       );
     }

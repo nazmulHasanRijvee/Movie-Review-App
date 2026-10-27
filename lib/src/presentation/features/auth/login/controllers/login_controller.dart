@@ -8,7 +8,6 @@ import 'package:cinephiler/src/data/services/url_launcher/url_launcher_service.d
 
 
 class LoginController extends GetxController {
-  // For showing loading state when OAuth is in progress
   final RxBool _isLoading = false.obs;
   String? errorMessage;
 
@@ -23,16 +22,14 @@ class LoginController extends GetxController {
 
   /// Whether the app went to the background while OAuth was running.
   bool _appWentToBackground = false;
-
   /// Whether we received the OAuth callback.
   bool _callbackReceived = false;
 
-  // Dependency Injection
+  // DI
   UrlLauncherService get _urlLauncherService => Get.find<UrlLauncherService>();
   DeepLinkServices get _deepLinkServices => Get.find<DeepLinkServices>();
   AuthRepositoryImpl get _authRepo => Get.find<AuthRepositoryImpl>();
 
-  // getter methods to ensure encapsulation
   bool get isLoading => _isLoading.value;
   String? get error => errorMessage;
 
@@ -85,8 +82,6 @@ class LoginController extends GetxController {
 
     final requestToken = uri.queryParameters['request_token'];
 
-    debugPrint('${uri.queryParametersAll}');
-
     if (approved != 'true' || requestToken == null) {
       await _stopAuth();
       _completeAuth(false);
@@ -110,11 +105,7 @@ class LoginController extends GetxController {
   }
 
   void _handleLifecycleState(AppLifecycleState state) {
-    debugPrint('App lifecycle state: $state');
-
-    if (!_isLoading.value) {
-      return;
-    }
+    if (!_isLoading.value) return;
 
     // User leaves our app and enters the browser.
     if (state == AppLifecycleState.paused ||
@@ -128,8 +119,6 @@ class LoginController extends GetxController {
 
     // User comes back to our app.
     if (state == AppLifecycleState.resumed) {
-      debugPrint('OAuth: App resumed');
-
       // If the OAuth callback already arrived, don't cancel it.
       if (_callbackReceived) {
         return;
@@ -140,8 +129,6 @@ class LoginController extends GetxController {
       // This most likely means the user pressed Back / Cancelled
       // the browser OAuth flow.
       if (_appWentToBackground) {
-        debugPrint('OAuth cancelled: App resumed without receiving callback');
-
         _stopAuth();
 
         _completeAuth(false);

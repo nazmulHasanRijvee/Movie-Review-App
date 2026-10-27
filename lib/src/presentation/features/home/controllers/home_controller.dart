@@ -1,7 +1,6 @@
 import 'package:cinephiler/src/data/repositories/auth_repository_impl.dart';
 import 'package:get/get.dart';
 import 'package:cinephiler/src/data/services/network/rest_client.dart';
-import 'package:cinephiler/src/presentation/core/routes/app_routes.dart';
 import 'package:cinephiler/src/data/models/movie_model.dart';
 import 'package:cinephiler/src/data/models/movie_response.dart';
 
@@ -97,11 +96,8 @@ class HomeController extends GetxController {
     return isSuccess;
   }
 
-  Future<void> logOut() async {
+  Future<bool> logOut() async {
     final isSuccess = await _authRepo.logOut();
-
-    if (isSuccess) {
-      Get.offAllNamed(AppRoutes.onboarding);
-    }
+    return isSuccess;
   }
 }
