@@ -9,7 +9,6 @@ import '../../../data/services/network/auth/secure_token.dart';
 import '../../../data/services/network/auth/token_manager.dart';
 import '../../../data/services/network/auth/token_store.dart';
 import '../../../data/services/network/dio_client.dart';
-import '../../../data/services/network/endpoints.dart';
 import '../../../data/services/network/rest_client.dart';
 
 class AppBindings implements Bindings {
@@ -32,8 +31,6 @@ class AppBindings implements Bindings {
     final tokenManager = Get.put<TokenManager>(
       TokenManager(
         store: Get.find<TokenStore>(),
-        refreshBaseUrl: Endpoints.base,
-        refreshEndpoint: Endpoints.refreshToken,
         onSessionExpired: () async {
           await Get.find<AuthRepositoryImpl>().clearUserData();
 

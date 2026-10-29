@@ -74,19 +74,13 @@ class AuthRepositoryImpl extends GetxService {
   }
 
   Future<bool> logOut() async {
-    bool isSuccess = false;
-
     final sessionId = await tokenManager.accessToken;
 
     if (sessionId != null) {
       await Api.call(
         action: restClient.deleteSession({"session_id": sessionId}),
 
-        onSuccess: (data) async {
-          await clearUserData();
-          await tokenManager.clearSession();
-          isSuccess = true;
-        },
+        onSuccess: (_) { },
 
         onError: (msg) {
           AppLogger.error("Failed to delete remote session: $msg");
@@ -94,7 +88,10 @@ class AuthRepositoryImpl extends GetxService {
       );
     }
 
-    return isSuccess;
+    await clearUserData();
+    await tokenManager.clearSession();
+
+    return true;
   }
   
 
