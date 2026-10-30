@@ -1,7 +1,7 @@
+import 'package:cinephiler/src/presentation/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/constants/app_colors.dart';
 import '../../../../data/models/movie_model.dart';
 import '../../../../data/models/user_model.dart';
 import '../../../../data/repositories/auth_repository_impl.dart';
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: context.color.primary,
 
       appBar: HomeAppBar(userName: user?.name),
 

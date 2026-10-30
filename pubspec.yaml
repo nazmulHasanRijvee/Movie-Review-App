@@ -37,6 +37,7 @@ dependencies:
   get: ^4.7.3
   app_links: ^7.2.1
   url_launcher: ^6.3.2
+  google_fonts: ^8.2.1
   # Storage and cache
   shared_preferences: ^2.5.5
   flutter_secure_storage: ^11.2.0

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cinephiler/src/core/constants/app_colors.dart';
+// import 'package:cinephiler/src/core/constants/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   const AppTheme._();
@@ -7,7 +8,7 @@ class AppTheme {
   static ThemeData get theme => ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
     textTheme: textTheme,
-    scaffoldBackgroundColor: AppColors.primary,
+    //scaffoldBackgroundColor: AppColors.primary,
     outlinedButtonTheme: outlinedButtonTheme,
     elevatedButtonTheme: elevatedButtonTheme,
   );
@@ -21,13 +22,16 @@ class AppTheme {
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
+    bodyMedium: GoogleFonts.manrope(
+      
+    )
   );
 
   static OutlinedButtonThemeData get outlinedButtonTheme =>
       OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           side: BorderSide(color: Colors.yellowAccent, width: 1.5),
-          backgroundColor: AppColors.accent,
+          // backgroundColor: AppColors.accent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -38,7 +42,7 @@ class AppTheme {
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           elevation: 5,
-          backgroundColor: AppColors.accent,
+          // backgroundColor: AppColors.accent,
           shape: RoundedRectangleBorder(borderRadius: .circular(12)),
         ),
       );

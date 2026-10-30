@@ -1,7 +1,7 @@
+import 'package:cinephiler/src/presentation/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/asset_paths.dart';
 import '../../../core/routes/app_routes.dart';
 import '../controllers/home_controller.dart';
@@ -15,7 +15,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: false,
-      backgroundColor: AppColors.primary,
+      backgroundColor: context.color.primary,
 
       title: Row(
         mainAxisSize: .min,
