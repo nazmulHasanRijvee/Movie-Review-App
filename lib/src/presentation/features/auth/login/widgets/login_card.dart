@@ -1,7 +1,7 @@
+import 'package:cinephiler/src/presentation/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_strings.dart';
-import '../../../../../core/extensions/theme_extension.dart';
 import 'login_button.dart';
 
 class LoginCard extends StatelessWidget {
@@ -22,14 +22,14 @@ class LoginCard extends StatelessWidget {
             const SizedBox(height: 50),
             Text(
               AppStrings.loginText,
-              style: context.theme.textTheme.titleLarge,
+              style: context.textStyle.bodyLarge,
             ),
 
             /// Telling the user to Sign in to continue
             const SizedBox(height: 10),
             Text(
               AppStrings.signInText,
-              style: context.theme.textTheme.bodyLarge?.copyWith(
+              style: context.textStyle.bodyLarge.copyWith(
                 fontWeight: .w500,
                 color: Colors.white.withAlpha(200),
               ),

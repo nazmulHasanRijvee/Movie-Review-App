@@ -17,6 +17,7 @@ class MovieApp extends StatelessWidget {
       title: 'Movie Review',
       theme: context.theme,
       darkTheme: context.darkTheme,
+      themeMode: ThemeMode.system,
       initialRoute: AppRoutes.splash,
       initialBinding: AppBindings(),
       getPages: AppPages.routes,

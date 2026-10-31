@@ -41,8 +41,7 @@ class TokenManager {
 
     await _store.write(TokenKey.access, access);
 
-    if (refresh != null && refresh.isNotEmpty)
-      await _store.write(TokenKey.refresh, refresh);
+    if (refresh != null && refresh.isNotEmpty) await _store.write(TokenKey.refresh, refresh);
 
     _accessToken = access;
     if (refresh != null && refresh.isNotEmpty) _refreshToken = refresh;

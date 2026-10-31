@@ -1,3 +1,4 @@
+import 'package:cinephiler/src/presentation/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -6,9 +7,8 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../../core/constants/app_strings.dart';
-import '../../../../../core/extensions/theme_extension.dart';
 import '../controllers/login_controller.dart';
-import 'button_loading_indicator.dart';
+import '../../../../core/widgets/button_loading_indicator.dart';
 
 class LoginButton extends StatefulWidget {
   const LoginButton({super.key});
@@ -32,7 +32,7 @@ class _LoginButtonState extends State<LoginButton> {
               ? const ButtonLoadingIndicator()
               : Text(
                   AppStrings.loginText,
-                  style: context.theme.textTheme.bodyLarge,
+                  style: context.textStyle.bodyLarge,
                 ),
         ),
       ),

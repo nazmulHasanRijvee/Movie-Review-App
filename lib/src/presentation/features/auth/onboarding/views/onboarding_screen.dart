@@ -1,12 +1,13 @@
+import 'package:cinephiler/src/presentation/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cinephiler/src/presentation/features/auth/onboarding/widgets/onboarding_elevated_button.dart';
-import 'package:cinephiler/src/presentation/features/auth/onboarding/widgets/onboarding_stack.dart';
-import 'package:cinephiler/src/presentation/core/widgets/show_snackbar.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../../core/constants/app_strings.dart';
+import '../../../../core/widgets/show_snackbar.dart';
 import '../controllers/onboarding_controller.dart';
+import '../widgets/onboarding_elevated_button.dart';
+import '../widgets/onboarding_stack.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -24,9 +25,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       body: Column(
         children: [
           OnboardingStack(),
+
           const SizedBox(height: 10),
+
           buildOnboardingText(context),
+
           const SizedBox(height: 90),
+
           OnboardingElevatedButton(onPressed: getToken),
         ],
       ),
@@ -39,7 +44,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       width: 250,
       child: Text(
         AppStrings.onboardingText,
-        style: context.theme.textTheme.bodyLarge,
+        style: context.textStyle.bodyLarge,
         textAlign: TextAlign.center,
       ),
     );

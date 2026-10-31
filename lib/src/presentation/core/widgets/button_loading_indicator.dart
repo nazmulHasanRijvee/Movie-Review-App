@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theme/theme.dart';
+
 class ButtonLoadingIndicator extends StatelessWidget {
   const ButtonLoadingIndicator({super.key});
 
@@ -11,7 +13,7 @@ class ButtonLoadingIndicator extends StatelessWidget {
       child: CircularProgressIndicator(
         // RepaintBoundary for optimization
         strokeWidth: 4,
-        backgroundColor: Colors.yellowAccent,
+        backgroundColor: context.color.active,
       ),
     );
   }

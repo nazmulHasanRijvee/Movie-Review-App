@@ -6,7 +6,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
 
   /// HEADLINES
   TextStyle get headLineLarge {
-    return GoogleFonts.manrope(
+    return GoogleFonts.poppins(
       height: 1.40,
       fontSize: 24,
       letterSpacing: 0,
@@ -15,7 +15,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   }
 
   TextStyle get headLineMedium {
-    return GoogleFonts.manrope(
+    return GoogleFonts.poppins(
       height: 1.40,
       fontSize: 20,
       letterSpacing: 0,
@@ -24,7 +24,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   }
 
   TextStyle get headLineSmall {
-    return GoogleFonts.manrope(
+    return GoogleFonts.poppins(
       height: 1.33,
       fontSize: 18,
       letterSpacing: 0,
@@ -34,7 +34,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
 
   /// TITLES
   TextStyle get titleLarge {
-    return GoogleFonts.manrope(
+    return GoogleFonts.poppins(
       height: 1.25,
       fontSize: 34,
       fontWeight: FontWeight.w700,
@@ -42,7 +42,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   }
 
   TextStyle get titleMedium {
-    return GoogleFonts.manrope(
+    return GoogleFonts.poppins(
       height: 1.25,
       fontSize: 28,
       fontWeight: FontWeight.w600,
@@ -50,7 +50,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   }
 
   TextStyle get titleSmall {
-    return GoogleFonts.manrope(
+    return GoogleFonts.poppins(
       height: 1.30,
       fontSize: 26,
       fontWeight: FontWeight.w600,
@@ -59,15 +59,15 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
 
   /// BODY TEXT
   TextStyle get bodyLarge {
-    return GoogleFonts.manrope(
+    return GoogleFonts.poppins(
       height: 1.50,
-      fontSize: 22,
+      fontSize: 20,
       fontWeight: FontWeight.w700,
     );
   }
 
   TextStyle get bodyMedium {
-    return GoogleFonts.manrope(
+    return GoogleFonts.poppins(
       height: 1.45,
       fontSize: 14,
       letterSpacing: 0,
@@ -76,7 +76,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   }
 
   TextStyle get bodySmall {
-    return GoogleFonts.manrope(
+    return GoogleFonts.poppins(
       height: 1.42,
       fontSize: 12,
       letterSpacing: 0,
@@ -86,7 +86,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
 
   /// LABELS
   TextStyle get labelLarge {
-    return GoogleFonts.manrope(
+    return GoogleFonts.poppins(
       height: 1.15,
       fontSize: 16,
       letterSpacing: 1,
@@ -95,7 +95,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   }
 
   TextStyle get labelMedium {
-    return GoogleFonts.manrope(
+    return GoogleFonts.poppins(
       height: 1.15,
       fontSize: 14,
       letterSpacing: 1,
@@ -104,7 +104,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   }
 
   TextStyle get labelSmall {
-    return GoogleFonts.manrope(
+    return GoogleFonts.poppins(
       height: 1.15,
       fontSize: 12,
       letterSpacing: 1,
