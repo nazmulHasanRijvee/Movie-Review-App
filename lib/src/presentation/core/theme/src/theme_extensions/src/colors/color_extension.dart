@@ -32,7 +32,7 @@ abstract interface class ColorExtension {
   final Color scaffoldBackground;
   final Color border;
   final Color icon;
-  
+
   final Color success;
   final Color error;
   final Color warning;

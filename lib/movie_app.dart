@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/utils.dart';
 
-
 import 'src/presentation/core/app_bindings/app_bindings.dart';
 import 'src/presentation/core/routes/app_pages.dart';
 import 'src/presentation/core/routes/app_routes.dart';

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   const TextStyleExtension();
 
+  /// HEADLINES
   TextStyle get headLineLarge {
     return GoogleFonts.manrope(
       height: 1.40,
@@ -31,18 +32,43 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
     );
   }
 
+  /// TITLES
+  TextStyle get titleLarge {
+    return GoogleFonts.manrope(
+      height: 1.25,
+      fontSize: 34,
+      fontWeight: FontWeight.w700,
+    );
+  }
+
+  TextStyle get titleMedium {
+    return GoogleFonts.manrope(
+      height: 1.25,
+      fontSize: 28,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+  TextStyle get titleSmall {
+    return GoogleFonts.manrope(
+      height: 1.30,
+      fontSize: 26,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+  /// BODY TEXT
   TextStyle get bodyLarge {
     return GoogleFonts.manrope(
       height: 1.50,
-      fontSize: 16,
-      letterSpacing: 0,
-      fontWeight: FontWeight.w400,
+      fontSize: 22,
+      fontWeight: FontWeight.w700,
     );
   }
 
   TextStyle get bodyMedium {
     return GoogleFonts.manrope(
-      height: 1.42,
+      height: 1.45,
       fontSize: 14,
       letterSpacing: 0,
       fontWeight: FontWeight.w400,
@@ -58,6 +84,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
     );
   }
 
+  /// LABELS
   TextStyle get labelLarge {
     return GoogleFonts.manrope(
       height: 1.15,
@@ -86,7 +113,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   }
 
   @override
-  ThemeExtension<TextStyleExtension> copyWith() => const TextStyleExtension();
+  ThemeExtension<TextStyleExtension> copyWith() => this;
 
   @override
   ThemeExtension<TextStyleExtension> lerp(

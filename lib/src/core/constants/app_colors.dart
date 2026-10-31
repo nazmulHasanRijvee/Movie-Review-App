@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Legacy AppColors - mirrors tokens in [_Primitive] for backward compatibility.
-/// 
+///
 /// Prefer using [context.color] from the theme system.
 class AppColors {
   const AppColors._();

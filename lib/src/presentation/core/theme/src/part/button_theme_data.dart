@@ -60,25 +60,28 @@ class _ElevatedButtonLightThemeData with ThemeExtensions {
   ElevatedButtonThemeData call() {
     return ElevatedButtonThemeData(
       style: ButtonStyle(
-        elevation: WidgetStateProperty.all(0),
+        elevation: WidgetStateProperty.all(5),
+        backgroundColor: WidgetStateProperty.all(
+          const LightColorExtension().accent.yellow,
+        ),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(const Dimensions().radius.md),
-            side: BorderSide(
-              color: lightColor.primary,
-              width: dimensions.spacing.xxs,
-            ),
+            // side: BorderSide(
+            //   color: lightColor.primary,
+            //   width: dimensions.spacing.xxs,
+            // ),
           ),
         ),
-        padding: WidgetStateProperty.all(
-          EdgeInsets.symmetric(horizontal: dimensions.spacing.xl),
-        ),
-        minimumSize: WidgetStateProperty.all(
-          Size(double.infinity, dimensions.spacing.xxl),
-        ),
-        textStyle: WidgetStateProperty.all(
-          const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-        ),
+        // padding: WidgetStateProperty.all(
+        //   EdgeInsets.symmetric(horizontal: dimensions.spacing.xl),
+        // ),
+        // minimumSize: WidgetStateProperty.all(
+        //   Size(double.infinity, dimensions.spacing.xxl),
+        // ),
+        // textStyle: WidgetStateProperty.all(
+        //   const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        // ),
       ),
     );
   }
@@ -89,23 +92,76 @@ class _ElevatedButtonDarkThemeData with ThemeExtensions {
   ElevatedButtonThemeData call() {
     return ElevatedButtonThemeData(
       style: ButtonStyle(
-        elevation: WidgetStateProperty.all(0),
+        elevation: WidgetStateProperty.all(5),
+        backgroundColor: WidgetStateProperty.all(
+          const DarkColorExtension().accent.yellow,
+        ),
         shape: WidgetStateProperty.all(
-          StadiumBorder(
-            side: BorderSide(
-              color: darkColor.primary,
-              width: dimensions.spacing.xxs,
-            ),
+          RoundedRectangleBorder(
+            borderRadius: .circular(const Dimensions().radius.md),
+            // side: BorderSide(
+            //   color: darkColor.primary,
+            //   width: dimensions.spacing.xxs,
+            // ),
           ),
         ),
-        padding: WidgetStateProperty.all(
-          EdgeInsets.symmetric(horizontal: dimensions.spacing.xl),
+        // padding: WidgetStateProperty.all(
+        //   EdgeInsets.symmetric(horizontal: dimensions.spacing.xl),
+        // ),
+        // minimumSize: WidgetStateProperty.all(
+        //   Size(double.infinity, dimensions.spacing.xxl),
+        // ),
+        // textStyle: WidgetStateProperty.all(
+        //   const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        // ),
+      ),
+    );
+  }
+}
+
+/// Outlined Button
+/// Light Theme
+class _OutlinedButtonLightThemeData with ThemeExtensions {
+  OutlinedButtonThemeData call() {
+    final accentColor = const LightColorExtension().accent;
+
+    return OutlinedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.all(accentColor.yellow),
+        side: WidgetStateProperty.all(
+          BorderSide(
+            color: accentColor.yellow,
+            width: const Dimensions().spacing.xxxs,
+          ),
         ),
-        minimumSize: WidgetStateProperty.all(
-          Size(double.infinity, dimensions.spacing.xxl),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(const Dimensions().radius.md),
+          ),
         ),
-        textStyle: WidgetStateProperty.all(
-          const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+}
+
+/// Light Theme
+class _OutlinedButtonDarkThemeData with ThemeExtensions {
+  OutlinedButtonThemeData call() {
+    final accentColor = const DarkColorExtension().accent;
+
+    return OutlinedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.all(accentColor.yellow),
+        side: WidgetStateProperty.all(
+          BorderSide(
+            color: accentColor.yellow,
+            width: const Dimensions().spacing.xxxs,
+          ),
+        ),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(const Dimensions().radius.md),
+          ),
         ),
       ),
     );

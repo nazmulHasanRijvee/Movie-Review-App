@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:get/get.dart';
 
 import '../../core/logger/app_logger.dart';
@@ -11,12 +10,11 @@ import '../services/network/auth/token_manager.dart';
 import '../services/network/rest_client.dart';
 
 class AuthRepositoryImpl extends GetxService {
-
   AuthRepositoryImpl({
     required this.cacheService,
     required this.restClient,
-    required this.tokenManager
-    }) {
+    required this.tokenManager,
+  }) {
     getUserData();
   }
 
@@ -27,14 +25,11 @@ class AuthRepositoryImpl extends GetxService {
 
   UserModel? get user => _userModel;
 
-  Future<bool> login (String requestToken) async {
-
+  Future<bool> login(String requestToken) async {
     bool isSuccess = false;
 
     await Api.call(
-      action: restClient.login(
-        request: {"request_token": requestToken.trim()}
-      ),
+      action: restClient.login(request: {"request_token": requestToken.trim()}),
 
       onSuccess: (data) async {
         AppLogger.info("${data["session_id"]}");
@@ -44,14 +39,13 @@ class AuthRepositoryImpl extends GetxService {
 
       onError: (msg) {
         AppLogger.error("Login error: $msg");
-      }
+      },
     );
 
     return isSuccess;
   }
 
   Future<bool> fetchUserData(String sessionId) async {
-
     bool isSuccess = false;
 
     await Api.call(
@@ -60,17 +54,16 @@ class AuthRepositoryImpl extends GetxService {
       onSuccess: (data) async {
         await saveUserData(data);
         await tokenManager.saveTokens(access: sessionId);
-        
+
         isSuccess = true;
       },
 
       onError: (msg) {
         AppLogger.error("Fetch user error: $msg");
-      }
+      },
     );
 
     return isSuccess;
-    
   }
 
   Future<bool> logOut() async {
@@ -80,7 +73,7 @@ class AuthRepositoryImpl extends GetxService {
       await Api.call(
         action: restClient.deleteSession({"session_id": sessionId}),
 
-        onSuccess: (_) { },
+        onSuccess: (_) {},
 
         onError: (msg) {
           AppLogger.error("Failed to delete remote session: $msg");
@@ -93,7 +86,6 @@ class AuthRepositoryImpl extends GetxService {
 
     return true;
   }
-  
 
   Future<void> saveUserData(UserModel model) async {
     await cacheService.save<String>(CacheKey.user, jsonEncode(model.toJson()));

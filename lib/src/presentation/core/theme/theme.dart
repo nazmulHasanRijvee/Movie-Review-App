@@ -3,7 +3,6 @@
 import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter/material.dart';
 
-
 import 'src/theme_data.dart';
 import 'src/theme_extensions/extensions.dart';
 

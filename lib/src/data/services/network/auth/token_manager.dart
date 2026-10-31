@@ -6,12 +6,8 @@ import '../../../../core/logger/app_logger.dart';
 import 'token_store.dart';
 
 class TokenManager {
-  TokenManager({
-    required TokenStore store,
-    this.onSessionExpired,
-  }) : _store = store
-  
-  {
+  TokenManager({required TokenStore store, this.onSessionExpired})
+    : _store = store {
     _ready = _loadTokens();
   }
 
@@ -45,12 +41,12 @@ class TokenManager {
 
     await _store.write(TokenKey.access, access);
 
-    if (refresh != null && refresh.isNotEmpty) await _store.write(TokenKey.refresh, refresh);
+    if (refresh != null && refresh.isNotEmpty)
+      await _store.write(TokenKey.refresh, refresh);
 
     _accessToken = access;
     if (refresh != null && refresh.isNotEmpty) _refreshToken = refresh;
   }
-
 
   Future<void> clearSession({bool notifyExpired = false}) async {
     await _ready;

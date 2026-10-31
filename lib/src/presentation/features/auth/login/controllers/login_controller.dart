@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:cinephiler/src/data/services/deep_links/deep_link_services.dart';
 import 'package:cinephiler/src/data/services/url_launcher/url_launcher_service.dart';
 
-
 class LoginController extends GetxController {
   final RxBool _isLoading = false.obs;
   String? errorMessage;
@@ -22,6 +21,7 @@ class LoginController extends GetxController {
 
   /// Whether the app went to the background while OAuth was running.
   bool _appWentToBackground = false;
+
   /// Whether we received the OAuth callback.
   bool _callbackReceived = false;
 

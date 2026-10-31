@@ -18,8 +18,10 @@ class UnauthorizedInterceptor extends Interceptor {
     final data = err.response?.data;
     final code = data is Map ? data["status_code"] : null;
     final isSessionError = code == 3 || code == 17;
-    
-    final hadSessionParam = err.requestOptions.queryParameters.containsKey("session_id");
+
+    final hadSessionParam = err.requestOptions.queryParameters.containsKey(
+      "session_id",
+    );
 
     if (statusCode == 401 && isSessionError && hadSessionParam) {
       AppLogger.error("Unauthorized session cleared");

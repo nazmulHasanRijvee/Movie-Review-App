@@ -6,6 +6,7 @@ abstract class AccentColors {
   Color get blue;
   Color get purple;
   Color get yellow;
+  Color get yellowLight;
 }
 
 class _LightAccentColors extends AccentColors {
@@ -18,7 +19,10 @@ class _LightAccentColors extends AccentColors {
   Color get purple => _Primitive.accentPurple;
 
   @override
-  Color get yellow => _Primitive.ratingAmber;
+  Color get yellow => _Primitive.accentYellow;
+
+  @override
+  Color get yellowLight => _Primitive.accentYellowLight;
 }
 
 class _DarkAccentColors extends AccentColors {
@@ -31,5 +35,8 @@ class _DarkAccentColors extends AccentColors {
   Color get purple => _Primitive.accentPurple;
 
   @override
-  Color get yellow => _Primitive.ratingAmber;
+  Color get yellow => _Primitive.accentYellow;
+
+  @override
+  Color get yellowLight => _Primitive.accentYellowLight;
 }

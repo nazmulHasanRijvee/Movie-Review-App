@@ -9,7 +9,6 @@ import 'interceptors/api_token_interceptor.dart';
 import 'interceptors/unauthorized_interceptor.dart';
 
 class DioClient extends GetxService {
-
   static Dio getInstance({required TokenManager tokenManager}) {
     final dio = Dio(
       BaseOptions(

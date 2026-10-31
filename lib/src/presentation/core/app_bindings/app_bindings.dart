@@ -23,10 +23,7 @@ class AppBindings implements Bindings {
     );
 
     // Secure token storage & TokenManager
-    Get.put<TokenStore>(
-      SecureTokenStore(),
-      permanent: true,
-    );
+    Get.put<TokenStore>(SecureTokenStore(), permanent: true);
 
     final tokenManager = Get.put<TokenManager>(
       TokenManager(
@@ -48,16 +45,15 @@ class AppBindings implements Bindings {
     final dio = DioClient.getInstance(tokenManager: tokenManager);
     Get.put<RestClient>(RestClient(dio), permanent: true);
 
-    // 
+    //
     Get.put<AuthRepositoryImpl>(
       AuthRepositoryImpl(
         cacheService: Get.find<CacheService>(),
         restClient: Get.find<RestClient>(),
-        tokenManager: Get.find<TokenManager>()
+        tokenManager: Get.find<TokenManager>(),
       ),
       permanent: true,
     );
-
 
     // Repositories
     Get.put<MovieRepositoryImpl>(MovieRepositoryImpl(), permanent: true);

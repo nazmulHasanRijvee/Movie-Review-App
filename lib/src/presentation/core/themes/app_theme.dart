@@ -22,9 +22,7 @@ class AppTheme {
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
-    bodyMedium: GoogleFonts.manrope(
-      
-    )
+    bodyMedium: GoogleFonts.manrope(),
   );
 
   static OutlinedButtonThemeData get outlinedButtonTheme =>

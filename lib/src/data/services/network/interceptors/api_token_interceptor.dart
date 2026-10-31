@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 /// Attaches the current Bearer access token to every outgoing request.
 /// Nothing else, no refresh logic, no queue, no navigation.
 class ApiTokenInterceptor extends Interceptor {
-  
   @override
   Future<void> onRequest(
     RequestOptions options,

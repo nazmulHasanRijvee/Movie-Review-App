@@ -36,7 +36,7 @@ class MovieRepositoryImpl extends GetxService implements MovieRepository {
     if (_cache.length >= 3) {
       _cache.remove(_cache.keys.first);
     }
-    
+
     _cache[movieId] = movie;
   }
 
